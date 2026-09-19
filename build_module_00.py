@@ -23,6 +23,8 @@ PRIMARY = "#4DD9E8"
 SECONDARY = "#F3EEFF"
 BACKGROUND = "#0E0B1F"
 PANEL = "#141123"
+POSTIT = "#FFE86B"
+POSTIT_INK = "#2A2416"
 
 W, H = 1920, 1080
 FPS = 30
@@ -30,9 +32,9 @@ CRF = "20"
 PRESET = "fast"
 AUDIO_RATE = "48000"
 
-# Orbitron/Rajdhani are unavailable: fonts.google.com is blocked by the proxy.
-BOLD = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
-REGULAR = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
+# Comic Neue via apt; fonts.google.com is blocked by the proxy.
+BOLD = "/usr/share/fonts/opentype/comic-neue/ComicNeue-Bold.otf"
+REGULAR = "/usr/share/fonts/opentype/comic-neue/ComicNeue-Regular.otf"
 
 ROOT = Path(__file__).parent
 BUILD = ROOT / "build"
@@ -98,6 +100,27 @@ def tracked(draw, xy, text, f, fill, spacing):
         x += draw.textlength(char, font=f) + spacing
 
 
+def sticky_note(text, size=38, angle=-2.5):
+    """The caption as a tilted post-it with a shadow and a folded corner."""
+    f = font(BOLD, size)
+    probe = ImageDraw.Draw(Image.new("RGB", (1, 1)))
+    pad_x, pad_y = 46, 28
+    nw = int(probe.textlength(text, font=f) + pad_x * 2)
+    nh = int(size + pad_y * 2)
+    margin = 28
+
+    canvas = Image.new("RGBA", (nw + margin * 2, nh + margin * 2), (0, 0, 0, 0))
+    draw = ImageDraw.Draw(canvas)
+    draw.rectangle([margin + 8, margin + 10, margin + nw + 8, margin + nh + 10],
+                   fill=(0, 0, 0, 120))
+    draw.rectangle([margin, margin, margin + nw, margin + nh], fill=POSTIT)
+    fold = 26
+    draw.polygon([(margin + nw - fold, margin + nh), (margin + nw, margin + nh - fold),
+                  (margin + nw, margin + nh)], fill="#E3CC55")
+    draw.text((margin + pad_x, margin + pad_y - 6), text, font=f, fill=POSTIT_INK)
+    return canvas.rotate(angle, resample=Image.BICUBIC, expand=True)
+
+
 def chrome(img, draw, active_step=None):
     """The branded frame: top bar, wordmark, five-step lower third."""
     draw.rectangle([0, 0, W, 76], fill=PANEL)
@@ -145,21 +168,22 @@ def screen_card(path, shot, position, total, caption, active_step):
     draw = ImageDraw.Draw(img)
     chrome(img, draw, active_step)
 
-    top, bottom = 160, H - 250
-    box_w, box_h = W - 320, bottom - top - 70
+    note = sticky_note(caption)
+    note_y = 126
+    img.paste(note, ((W - note.width) // 2, note_y), note)
+
+    top = note_y + note.height + 4
+    bottom = H - 232
+    box_w, box_h = W - 320, bottom - top
     shot_img = Image.open(shot).convert("RGB")
     scale = min(box_w / shot_img.width, box_h / shot_img.height)
     resized = shot_img.resize(
         (int(shot_img.width * scale), int(shot_img.height * scale)), Image.LANCZOS)
     x = (W - resized.width) // 2
-    y = top + 60 + (box_h - resized.height) // 2
+    y = top + (box_h - resized.height) // 2
     draw.rectangle([x - 3, y - 3, x + resized.width + 3, y + resized.height + 3],
                    fill=PRIMARY)
     img.paste(resized, (x, y))
-
-    f_cap = font(BOLD, 36)
-    cx = (W - draw.textlength(caption, font=f_cap)) / 2
-    draw.text((cx, top + 6), caption, font=f_cap, fill=SECONDARY)
 
     marker = f"{position} / {total}"
     draw.text((W - 60 - draw.textlength(marker, font=font(BOLD, 28)), 30),
