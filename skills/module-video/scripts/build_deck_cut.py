@@ -50,6 +50,54 @@ def slide_frame(path, slide_image, index, total, chrome):
     img.save(path)
 
 
+def slide_spans(slides, total_seconds):
+    """Resolve each slide to (start, end).
+
+    A slide may carry "at", a second taken from listening to the narration.
+    Those anchors are honoured exactly; slides between two anchors divide the
+    gap evenly. Word weight is only a fallback for a deck with no anchors at
+    all, and it is a poor one: narration pace has little to do with how much
+    text a slide happens to carry.
+    """
+    anchors = {i: float(s["at"]) for i, s in enumerate(slides) if "at" in s}
+    if not anchors:
+        weights = [max(1, s.get("weight", 1)) for s in slides]
+        total = sum(weights)
+        spans, at = [], 0.0
+        for w in weights:
+            span = total_seconds * w / total
+            spans.append((at, at + span))
+            at += span
+        return spans
+
+    anchors.setdefault(0, 0.0)
+    known = sorted(anchors)
+    for a, b in zip(known, known[1:]):
+        if anchors[b] <= anchors[a]:
+            sys.exit(f"slide {b + 1} is anchored at {anchors[b]}s, which is not "
+                     f"after slide {a + 1} at {anchors[a]}s")
+    if anchors[known[-1]] >= total_seconds:
+        sys.exit(f"slide {known[-1] + 1} is anchored at {anchors[known[-1]]}s "
+                 f"but the narration is {total_seconds:.1f}s")
+
+    starts = [None] * len(slides)
+    for i, at in anchors.items():
+        starts[i] = at
+    for a, b in zip(known, known[1:]):
+        gap = (anchors[b] - anchors[a]) / (b - a)
+        for step, i in enumerate(range(a + 1, b), start=1):
+            starts[i] = anchors[a] + gap * step
+    # slides after the final anchor share the remaining time
+    tail = known[-1]
+    if tail < len(slides) - 1:
+        gap = (total_seconds - anchors[tail]) / (len(slides) - tail)
+        for step, i in enumerate(range(tail + 1, len(slides)), start=1):
+            starts[i] = anchors[tail] + gap * step
+
+    return [(starts[i], starts[i + 1] if i + 1 < len(slides) else total_seconds)
+            for i in range(len(slides))]
+
+
 def main():
     if len(sys.argv) != 2:
         sys.exit(__doc__)
@@ -72,8 +120,7 @@ def main():
     slides = config["slides"]
 
     total_seconds = c.duration(narration)
-    weights = [max(1, s.get("weight", 1)) for s in slides]
-    total_weight = sum(weights)
+    spans = slide_spans(slides, total_seconds)
     print(f"narration {total_seconds:.1f}s over {len(slides)} slides")
 
     segments = []
@@ -82,11 +129,14 @@ def main():
         if not source.exists():
             sys.exit(f"slide image not found: {source}")
 
-        span = total_seconds * weights[index] / total_weight
+        start, end = spans[index]
+        span = end - start
         frames = int(round(span * c.FPS))
         shots = slide.get("shots", [])
+        anchored = " (anchored)" if "at" in slide else ""
         print(f"[{index + 1:2}/{len(slides)}] {slide['image']}  "
-              f"{span:5.1f}s  {len(shots)} screenshots")
+              f"{start:6.1f}-{end:6.1f}s ({span:5.1f}s)  "
+              f"{len(shots)} shots{anchored}")
 
         page = build / f"frame_{index:02}.png"
         slide_frame(page, source, index, len(slides), chrome)

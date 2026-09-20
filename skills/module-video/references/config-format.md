@@ -78,6 +78,42 @@ Extra keys for `build_script_cut.py`:
 | `slides` | yes | List of `{title, bullets, voiceover, shots}` |
 | `card_top` | no | Card top edge in pixels, default 250 |
 
+## Deck cut
+
+Extra keys for `build_deck_cut.py`:
+
+| Key | Required | Meaning |
+|---|---|---|
+| `narration` | yes | The voiceover recording |
+| `slides_dir` | yes | Folder of rendered slide images |
+| `slides` | yes | List of `{image, at, weight, shots}` |
+| `chrome` | no | `minimal` (default), `full`, or `none` |
+| `card_top` | no | Card top edge in pixels, default 420 |
+
+`at` is the second the narration reaches that slide, read off the recording.
+Anchors are honoured exactly and slides between two of them divide the gap
+evenly, so a handful of marks times a whole deck:
+
+```json
+"slides": [
+  { "image": "slide-01.png" },
+  { "image": "slide-02.png" },
+  { "image": "slide-06.png", "at": 33,
+    "shots": [["01-workspace.png", "Open your project"]] },
+  { "image": "slide-07.png", "at": 43 }
+]
+```
+
+Get the marks by listening and noting where each step begins. That is worth
+doing: `weight` exists only as a fallback for a deck with no anchors, and it
+is a poor one. On Module 01 word weight gave slide 8 fourteen seconds where
+the narration spends five, and slide 11 twenty-three where it spends
+thirty-seven. How much text a slide carries says little about how long the
+speaker dwells on it.
+
+Anchors must increase and must fall inside the narration; the build stops
+rather than emit a timeline that drifts.
+
 `voiceover` is the script text for that slide. It is not rendered — its word
 count sets the slide's share of the runtime, so paste the real text even
 though viewers never see it. `shots` may be omitted for title-only slides.

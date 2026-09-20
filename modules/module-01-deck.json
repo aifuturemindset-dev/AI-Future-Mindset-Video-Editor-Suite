@@ -8,39 +8,85 @@
   "chrome": "minimal",
   "card_top": 430,
   "slides": [
-    { "image": "slide-01.png", "weight": 63 },
-    { "image": "slide-02.png", "weight": 47 },
-    { "image": "slide-03.png", "weight": 79 },
-    { "image": "slide-04.png", "weight": 46 },
-    { "image": "slide-05.png", "weight": 60 },
+    {
+      "image": "slide-01.png"
+    },
+    {
+      "image": "slide-02.png"
+    },
+    {
+      "image": "slide-03.png"
+    },
+    {
+      "image": "slide-04.png"
+    },
+    {
+      "image": "slide-05.png"
+    },
     {
       "image": "slide-06.png",
-      "weight": 40,
-      "shots": [["01-content-engine.png", "Open your Content Engine project"]]
+      "shots": [
+        [
+          "01-content-engine.png",
+          "Open your Content Engine project"
+        ]
+      ],
+      "at": 33
     },
     {
       "image": "slide-07.png",
-      "weight": 40,
-      "shots": [["02-hook-writer.png", "Use the hook-writer skill"]]
+      "shots": [
+        [
+          "02-hook-writer.png",
+          "Use the hook-writer skill"
+        ]
+      ],
+      "at": 43
     },
     {
       "image": "slide-08.png",
-      "weight": 38,
-      "shots": [["03-score-hooks.png", "Score and rank the top 5"]]
+      "shots": [
+        [
+          "03-score-hooks.png",
+          "Score and rank the top 5"
+        ]
+      ],
+      "at": 73
     },
-    { "image": "slide-09.png", "weight": 40 },
-    { "image": "slide-10.png", "weight": 35 },
+    {
+      "image": "slide-09.png",
+      "at": 78
+    },
+    {
+      "image": "slide-10.png",
+      "at": 88
+    },
     {
       "image": "slide-11.png",
-      "weight": 62,
-      "shots": [["04-full-formula.png", "Value point, format, 3 CTAs"]]
+      "shots": [
+        [
+          "04-full-formula.png",
+          "Value point, format, 3 CTAs"
+        ]
+      ],
+      "at": 116
     },
     {
       "image": "slide-12.png",
-      "weight": 29,
-      "shots": [["05-content-calendar.png", "Save it to your calendar row"]]
+      "shots": [
+        [
+          "05-content-calendar.png",
+          "Save it to your calendar row"
+        ]
+      ],
+      "at": 153
     },
-    { "image": "slide-13.png", "weight": 31 },
-    { "image": "slide-14.png", "weight": 50 }
+    {
+      "image": "slide-13.png",
+      "at": 177
+    },
+    {
+      "image": "slide-14.png"
+    }
   ]
 }
