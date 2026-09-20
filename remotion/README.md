@@ -49,6 +49,41 @@ npx remotion render module-01 out/module-01.mp4
 
 Add `--frames=1200-1500` to render a stretch while checking a change.
 
+## Pointing at things in raw footage
+
+A screen recording shows a cursor moving but not where attention belongs, so
+a viewer following along misses the control being clicked. `Callout` marks it
+the way the tutorial screenshots do — a box around the control, a curved
+arrow, and a label naming the action — and `SkillNote` pins a post-it naming
+the skill in use.
+
+See the `demo-annotated` composition; its cues live in
+`src/modules/demo-annotated.ts`:
+
+```ts
+{
+  at: 1, until: 5,
+  box: { x: 1180, y: 300, width: 420, height: 90 },
+  label: "Click New project",
+  side: "left",
+  skill: "hook-writer",
+}
+```
+
+Get the coordinates by exporting the frame you are annotating and reading
+pixel positions off it:
+
+```bash
+ffmpeg -ss 4 -i public/demo/raw-clip.mp4 -frames:v 1 /tmp/frame.png
+```
+
+The composition is 1920x1080, so positions in that still are the numbers to
+use directly. `side` is where the label sits (`left`, `right`, `above`,
+`below`); the arrow always curves to the nearest edge of the box.
+
+The box pulses gently while it is on screen. That is deliberate — it holds
+the eye through a long step without the marker ever drifting off the control.
+
 ## Add a module
 
 1. Put the assets in `public/module-02/` — `slides/`, `screenshots/`, `narration.mp3`
