@@ -113,3 +113,37 @@ Get-ChildItem "$env:USERPROFILE\Downloads\*.mp4" |
 
 A truncated download shows a smaller size than the source. Compare against the
 origin's `content-length` rather than guessing.
+
+## LibreOffice says "source file could not be loaded"
+
+A deck that is structurally valid — `unzip -t` clean, slide XML present — still
+refuses to convert, and the error names no reason.
+
+Check which LibreOffice packages are actually installed before blaming the
+file:
+
+```bash
+dpkg -l | awk '/^ii  libreoffice/{print $2}'
+```
+
+`libreoffice-core` alone has no format importers. Without
+`libreoffice-impress` there is nothing that can read a `.pptx`, so every deck
+fails identically regardless of content. The giveaway is that a plain text
+file fails too, which points at the installation rather than the document:
+
+```bash
+apt-get install -y libreoffice-impress
+```
+
+Embedded fonts (`ppt/fonts/*.fntdata`) are a plausible-looking suspect and are
+usually innocent. Confirm the importer exists before stripping anything out of
+a deck — an untouched deck renders with its intended typography.
+
+The `javaldx` warning is unrelated noise; conversion does not need Java.
+
+Rendering to frames, once conversion works:
+
+```bash
+soffice --headless --convert-to pdf --outdir DIR deck.pptx
+pdftoppm -r 150 -png DIR/deck.pdf DIR/slide   # needs poppler-utils
+```
