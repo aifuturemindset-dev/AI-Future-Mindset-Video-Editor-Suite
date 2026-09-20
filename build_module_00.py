@@ -213,8 +213,10 @@ def still_segment(png, dest, frames, zoom=True):
 
 
 def concat(files, dest, copy=True):
+    # Absolute paths: relative ones resolve against the listing's directory,
+    # which is not the segments' directory when dest lives elsewhere.
     listing = dest.with_suffix(".txt")
-    listing.write_text("".join(f"file '{f.name}'\n" for f in files))
+    listing.write_text("".join(f"file '{f.resolve()}'\n" for f in files))
     codec = ["-c", "copy"] if copy else [
         "-c:v", "libx264", "-preset", PRESET, "-crf", CRF, "-pix_fmt", "yuv420p",
         "-r", str(FPS), "-c:a", "aac", "-b:a", "128k", "-ar", AUDIO_RATE, "-ac", "2",
