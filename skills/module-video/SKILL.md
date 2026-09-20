@@ -195,6 +195,33 @@ Fonts are bundled in `assets/fonts/`. Where Google Fonts is blocked, the npm
 registry is often still reachable: `npm pack @fontsource/<family>` gives woff2,
 and `fonttools` converts it to the TTF that PIL and ffmpeg need.
 
+## Marking where to click
+
+Three treatments, and they solve different problems:
+
+**A screenshot that already has callouts baked in** — most capture tools draw
+the box and arrow for you. Frame it and caption it; `screenshot_card()` gives
+it a brand border, a shadow and a post-it naming the action. Do not draw a
+second arrow over one that is already there.
+
+**Raw screen footage** — nothing marks the control, and a cursor moving is not
+enough: a viewer following along will miss the click. The target needs a box
+around it, an arrow, and a label naming the action. ffmpeg can manage a static
+`drawbox`, but an arrow that draws itself and a box that holds the eye through
+a long step want a real renderer — that lives in the Remotion project's
+`Callout` component.
+
+**Naming the skill in use** — a post-it pinned to a corner, kept up for the
+whole step rather than flashed, so a viewer joining mid-step still knows what
+produced what they are seeing. `SkillNote` in the Remotion project.
+
+Get box coordinates by exporting the frame being annotated and reading pixel
+positions off it; at 1920x1080 they map one to one:
+
+```bash
+ffmpeg -ss 4 -i clip.mp4 -frames:v 1 /tmp/frame.png
+```
+
 ## When to reach for Remotion instead
 
 This pipeline renders without a browser and is right for a batch re-render.
