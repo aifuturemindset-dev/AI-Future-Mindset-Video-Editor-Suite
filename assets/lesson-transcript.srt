@@ -1,0 +1,244 @@
+1
+00:00:00,240 --> 00:00:02,040
+Ready  to  streamline  your  creative
+
+2
+00:00:02,040 --> 00:00:04,240
+process?  Let's  build  your  AI
+
+3
+00:00:04,240 --> 00:00:06,359
+content  studio.  We'll  set  up  your
+
+4
+00:00:06,359 --> 00:00:08,840
+tools,  repository,  and  calendar  in
+
+5
+00:00:08,840 --> 00:00:10,040
+just  a  few  minutes.
+
+6
+00:00:10,321 --> 00:00:13,001
+First,  head  to  claud.ai.
+
+7
+00:00:13,001 --> 00:00:14,921
+Create  a  new  project  and  name  it
+
+8
+00:00:14,921 --> 00:00:16,920
+content  engine.  This  is  the
+
+9
+00:00:16,920 --> 00:00:18,841
+foundation  where  all  your  creative
+
+10
+00:00:18,841 --> 00:00:19,921
+work  will  live.
+
+11
+00:00:20,202 --> 00:00:22,841
+Now,  set  your  brand  identity.
+
+12
+00:00:22,841 --> 00:00:25,362
+Upload  your  brandvoice.md
+
+13
+00:00:25,362 --> 00:00:27,922
+and  offer  sheet.md  files  into  the
+
+14
+00:00:27,922 --> 00:00:30,601
+project  knowledge  area.  This  trains
+
+15
+00:00:30,601 --> 00:00:32,402
+cloud  on  your  specific  business
+
+16
+00:00:32,402 --> 00:00:33,082
+goals.
+
+17
+00:00:33,083 --> 00:00:35,683
+Next,  click  on  customize  and  head
+
+18
+00:00:35,683 --> 00:00:37,643
+to  the  skills  tab.  This  is  where
+
+19
+00:00:37,643 --> 00:00:39,442
+we  plug  in  the  specialized  tools
+
+20
+00:00:39,442 --> 00:00:40,803
+you  need  to  accelerate  your
+
+21
+00:00:40,803 --> 00:00:41,643
+workflow.
+
+22
+00:00:41,964 --> 00:00:43,764
+You  need  to  install  those  core
+
+23
+00:00:43,764 --> 00:00:46,124
+skills.  Select  each  of  the  eight
+
+24
+00:00:46,124 --> 00:00:48,364
+zip  files  from  the  skills-zip
+
+25
+00:00:48,364 --> 00:00:50,363
+folder  and  upload  them  one  by
+
+26
+00:00:50,363 --> 00:00:51,044
+one.
+
+27
+00:00:51,285 --> 00:00:53,964
+Now,  let's  secure  your  work.  Open
+
+28
+00:00:53,964 --> 00:00:56,205
+github.com  and  create  a  new
+
+29
+00:00:56,205 --> 00:00:58,404
+repository.  This  keeps  your  file
+
+30
+00:00:58,404 --> 00:01:00,564
+safe,  organized  and  version
+
+31
+00:01:00,564 --> 00:01:02,045
+controlled  for  the  future.
+
+32
+00:01:02,286 --> 00:01:04,725
+Name  your  new  repository  content
+
+33
+00:01:04,725 --> 00:01:07,246
+engine.  This  specific  name  ensures
+
+34
+00:01:07,246 --> 00:01:08,885
+everything  sinks  perfectly  with
+
+35
+00:01:08,885 --> 00:01:10,526
+your  project  structure  as  we  build
+
+36
+00:01:10,526 --> 00:01:12,246
+out  your  creative  workflow.
+
+37
+00:01:12,527 --> 00:01:14,607
+With  the  repo  ready,  upload  your
+
+38
+00:01:14,607 --> 00:01:16,967
+course  kit  folder.  Drag  the  folder
+
+39
+00:01:16,967 --> 00:01:18,646
+directly  into  the  browser  and
+
+40
+00:01:18,646 --> 00:01:20,647
+click  commit  changes  to  save  your
+
+41
+00:01:20,647 --> 00:01:21,327
+work.
+
+42
+00:01:21,328 --> 00:01:24,487
+Organization  is  key.  Move  over  to
+
+43
+00:01:24,487 --> 00:01:26,328
+Google  Sheets  and  prepare  your
+
+44
+00:01:26,328 --> 00:01:27,888
+planning  hub  by  getting  your
+
+45
+00:01:27,888 --> 00:01:30,927
+content  calendar.csv  file  ready  for
+
+46
+00:01:30,927 --> 00:01:32,488
+the  import  process.
+
+47
+00:01:32,769 --> 00:01:34,729
+Simply  use  the  import  tool  in
+
+48
+00:01:34,729 --> 00:01:36,368
+Google  Sheets  to  bring  in  that
+
+49
+00:01:36,368 --> 00:01:39,129
+CSV  file.  This  calendar  is  the
+
+50
+00:01:39,129 --> 00:01:41,048
+road  map  for  your  upcoming  content
+
+51
+00:01:41,048 --> 00:01:42,009
+strategy.
+
+52
+00:01:42,250 --> 00:01:45,330
+Finally,  join  the  community.  Post
+
+53
+00:01:45,330 --> 00:01:47,769
+your  specific  niche  and  one  clear
+
+54
+00:01:47,769 --> 00:01:49,570
+content  goal  in  the  school
+
+55
+00:01:49,570 --> 00:01:51,649
+introductions  thread  to  start  your
+
+56
+00:01:51,649 --> 00:01:52,890
+journey  today.
+
+57
+00:01:53,211 --> 00:01:56,530
+One  final  tip.  Apps  update  often.
+
+58
+00:01:56,530 --> 00:01:57,891
+If  a  button  looks  different  than
+
+59
+00:01:57,891 --> 00:02:00,131
+described,  don't  worry.  Just  find
+
+60
+00:02:00,131 --> 00:02:01,811
+the  closest  match  and  help  the
+
+61
+00:02:01,811 --> 00:02:02,891
+community  out.
+

@@ -11,14 +11,29 @@ from pathlib import Path
 from PIL import Image, ImageDraw
 
 import build_module_00 as base
-from build_module_00 import (BOLD, BUILD, H, LESSON, OUT, PRIMARY, SCREENS,
+from build_module_00 import (BOLD, BUILD, H, LESSON, OUT, PRIMARY,
                              SHOTS, W, concat, duration, font, run,
                              sticky_note, title_card, still_segment,
                              lesson_chain, FPS, INTRO_SECONDS, OUTRO_SECONDS)
 
-LEAD_IN = 6.0
-HOLD = 11.0
-GAP = 1.5
+# Cued against the lesson's own narration, read from its mov_text subtitle
+# track. Times are lesson-relative seconds. The lesson turns to GitHub at
+# 51.3s and Google Sheets at 81.3s; screenshots for those steps never reached
+# disk, so nothing is cued past 51.3s.
+CUES = [
+    ("30.png", "Sign in with Google", 10.3, 13.2),
+    ("33.png", "Open Projects", 13.2, 16.0),
+    ("31.png", "Click New project", 16.0, 18.4),
+    ("32.png", "Add project details", 18.4, 22.5),
+    ("34.png", "Open your brand voice file", 22.5, 27.0),
+    ("35.png", "Select brand-voice.txt", 27.0, 32.4),
+    ("36.png", "Click Customize", 32.4, 37.2),
+    ("37.png", "Open the Skills tab", 37.2, 41.9),
+    ("38.png", "Switch to Yours", 41.9, 46.5),
+    ("39.png", "Click Add to upload skills", 46.5, 51.3),
+]
+
+FADE = 0.35
 
 CARD_MAX_W = 620
 CARD_MAX_H = 430
@@ -72,14 +87,16 @@ def main():
     OUT.mkdir(parents=True, exist_ok=True)
 
     lesson_seconds = duration(LESSON)
-    cycle = HOLD + GAP
-    last_end = LEAD_IN + (len(SCREENS) - 1) * cycle + HOLD
-    if last_end > lesson_seconds:
-        sys.exit(f"overlays run to {last_end:.1f}s but lesson is "
-                 f"{lesson_seconds:.1f}s; shorten HOLD or GAP")
+    if CUES[-1][3] > lesson_seconds:
+        sys.exit(f"last cue ends {CUES[-1][3]:.1f}s but lesson is "
+                 f"{lesson_seconds:.1f}s")
+    for (_, caption, start, end), (_, nxt, nxt_start, _) in zip(CUES, CUES[1:]):
+        if end > nxt_start:
+            sys.exit(f"cue overlap: '{caption}' ends {end}s, "
+                     f"'{nxt}' starts {nxt_start}s")
 
-    print(f"lesson {lesson_seconds:.1f}s, {len(SCREENS)} overlays, "
-          f"last ends {last_end:.1f}s")
+    print(f"lesson {lesson_seconds:.1f}s, {len(CUES)} cued overlays, "
+          f"{CUES[0][2]:.1f}s to {CUES[-1][3]:.1f}s")
 
     print("[1/4] intro and outro cards")
     title_card(BUILD / "ov_intro.png", "MODULE 00",
@@ -91,32 +108,32 @@ def main():
     still_segment(BUILD / "ov_outro.png", BUILD / "ov_seg_2.mp4",
                   OUTRO_SECONDS * FPS, zoom=False)
 
-    print(f"[2/4] {len(SCREENS)} overlay cards")
+    print(f"[2/4] {len(CUES)} overlay cards")
     cards = []
-    for index, (filename, caption, _active) in enumerate(SCREENS):
+    for index, (filename, caption, start, end) in enumerate(CUES):
         shot = SHOTS / filename
         if not shot.exists():
             sys.exit(f"missing screenshot: {shot}")
         card = BUILD / f"ov_card_{index}.png"
-        size = overlay_card(card, shot, index + 1, len(SCREENS), caption)
+        size = overlay_card(card, shot, index + 1, len(CUES), caption)
         cards.append(card)
-        print(f"      {index + 1}/{len(SCREENS)} {caption} {size[0]}x{size[1]}")
+        print(f"      {index + 1}/{len(CUES)} {start:5.1f}-{end:5.1f}s "
+              f"({end - start:.1f}s) {caption}")
 
     print("[3/4] compositing overlays onto the lesson")
     cmd = ["ffmpeg", "-i", str(LESSON)]
-    for card in cards:
-        cmd += ["-loop", "1", "-t", str(HOLD), "-i", str(card)]
+    for card, (_, _, start, end) in zip(cards, CUES):
+        cmd += ["-loop", "1", "-t", f"{end - start:.2f}", "-i", str(card)]
 
     parts = [f"[0:v]{lesson_chain()}[base]"]
     stream = "base"
-    for index in range(len(cards)):
-        start = LEAD_IN + index * cycle
-        end = start + HOLD
+    for index, (_, _, start, end) in enumerate(CUES):
+        hold = end - start
         # setpts shifts the still's clock so its fades line up with enable.
         parts.append(
             f"[{index + 1}:v]format=rgba,"
-            f"fade=t=in:st=0:d=0.5:alpha=1,"
-            f"fade=t=out:st={HOLD - 0.5}:d=0.5:alpha=1,"
+            f"fade=t=in:st=0:d={FADE}:alpha=1,"
+            f"fade=t=out:st={hold - FADE:.2f}:d={FADE}:alpha=1,"
             f"setpts=PTS+{start}/TB[o{index}]"
         )
         nxt = f"b{index}"
