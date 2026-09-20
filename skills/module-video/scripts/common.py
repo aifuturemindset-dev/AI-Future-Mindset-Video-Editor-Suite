@@ -178,8 +178,10 @@ def screenshot_card(path, shot, position, total, caption,
     draw.rounded_rectangle([x0, y0, x1, y1], radius=16, fill=(18, 15, 32, 242))
     draw.rounded_rectangle([x0, y0, x1, y1], radius=16,
                            outline=BRAND["primary"], width=3)
-    draw.text((x0 + pad + border, y0 + 12), f"STEP {position} OF {total}",
-              font=font(BOLD, 22), fill=BRAND["primary"])
+    # "STEP 1 OF 1" reads as a mistake; the count only helps in a sequence.
+    if total > 1:
+        draw.text((x0 + pad + border, y0 + 12), f"STEP {position} OF {total}",
+                  font=font(BOLD, 22), fill=BRAND["primary"])
 
     ix, iy = x0 + pad + border, y0 + header + pad + border
     draw.rectangle([ix - border, iy - border, ix + sw + border, iy + sh + border],
