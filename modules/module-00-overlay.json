@@ -1,6 +1,6 @@
 {
   "module": "00",
-  "output_dir": "output/skill-test",
+  "output_dir": "output/videos",
   "screenshots_dir": "assets/screenshots",
   "lesson": "/root/.claude/uploads/7480ea35-ff60-5ba2-b5ab-d4a76ac8bb87/04bde690-Module_00__Set_up_your_AI_content_studio.mp4",
   "output_name": "Module_00_Overlay.mp4",
@@ -13,60 +13,132 @@
       "at": 10.3,
       "label": "head to claude.ai, create a new project",
       "shots": [
-        ["01-sign-in.png", "Sign in with Google"],
-        ["02-projects.png", "Open Projects"],
-        ["03-new-project.png", "Click New project"]
+        [
+          "01-sign-in.png",
+          "Sign in with Google"
+        ],
+        [
+          "02-projects.png",
+          "Open Projects"
+        ],
+        [
+          "03-new-project.png",
+          "Click New project"
+        ]
       ]
     },
     {
       "at": 20.2,
       "label": "set your brand identity, upload brand voice",
       "shots": [
-        ["04-project-details.png", "Add project details"],
-        ["05-brand-voice-file.png", "Open your brand voice file"],
-        ["06-select-brand-voice.png", "Select brand-voice.txt"]
+        [
+          "04-project-details.png",
+          "Add project details"
+        ],
+        [
+          "05-brand-voice-file.png",
+          "Open your brand voice file"
+        ],
+        [
+          "06-select-brand-voice.png",
+          "Select brand-voice.txt"
+        ]
       ]
     },
     {
       "at": 32.4,
       "label": "click customize, skills tab, install the eight skills",
       "shots": [
-        ["07-customize.png", "Click Customize"],
-        ["08-skills-tab.png", "Open the Skills tab"],
-        ["09-yours-tab.png", "Switch to Yours"],
-        ["10-add.png", "Click Add"],
-        ["11-upload-skill.png", "Click Upload skill"],
-        ["12-browse-files.png", "Click Browse files"],
-        ["13-open-zips.png", "Select all 8 skill zips"]
+        [
+          "07-customize.png",
+          "Click Customize"
+        ],
+        [
+          "08-skills-tab.png",
+          "Open the Skills tab"
+        ],
+        [
+          "09-yours-tab.png",
+          "Switch to Yours"
+        ],
+        [
+          "10-add.png",
+          "Click Add"
+        ],
+        [
+          "11-upload-skill.png",
+          "Click Upload skill"
+        ],
+        [
+          "12-browse-files.png",
+          "Click Browse files"
+        ],
+        [
+          "13-open-zips.png",
+          "Select all 8 skill zips"
+        ]
       ]
     },
     {
       "at": 51.3,
       "label": "open github.com and create a new repository",
       "shots": [
-        ["14-github-signup.png", "Sign up for GitHub"],
-        ["15-create-repository.png", "Click Create repository"]
+        [
+          "14-github-signup.png",
+          "Sign up for GitHub"
+        ],
+        [
+          "15-create-repository.png",
+          "Click Create repository"
+        ]
       ]
     },
     {
       "at": 62.3,
       "label": "name the repo, upload your course kit, commit",
       "shots": [
-        ["16-upload-files.png", "Click Upload files"],
-        ["17-choose-file.png", "Click Choose file"],
-        ["18-course-kit.png", "Pick the Course Kit folder"],
-        ["19-commit-changes.png", "Click Commit changes"]
+        [
+          "16-upload-files.png",
+          "Click Upload files"
+        ],
+        [
+          "17-choose-file.png",
+          "Click Choose file"
+        ],
+        [
+          "18-course-kit.png",
+          "Pick the Course Kit folder"
+        ],
+        [
+          "19-commit-changes.png",
+          "Click Commit changes"
+        ]
       ]
     },
     {
       "at": 81.3,
       "label": "move to Google Sheets and import the calendar",
       "shots": [
-        ["20-sheets-file.png", "Click File"],
-        ["21-import.png", "Click Import"],
-        ["22-browse.png", "Click Browse"],
-        ["23-open-csv.png", "Open content-calendar.csv"],
-        ["24-import-data.png", "Click Import data"]
+        [
+          "20-sheets-file.png",
+          "Click File"
+        ],
+        [
+          "21-import.png",
+          "Click Import"
+        ],
+        [
+          "22-browse.png",
+          "Click Browse"
+        ],
+        [
+          "23-open-csv.png",
+          "Open content-calendar.csv"
+        ],
+        [
+          "24-import-data.png",
+          "Click Import data"
+        ]
       ]
     }
   ],
