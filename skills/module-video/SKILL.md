@@ -10,23 +10,31 @@ finished, branded MP4.
 
 ## Pick the pipeline first
 
-The two pipelines are not variations on a theme. They answer different
+The three pipelines are not variations on a theme. They answer different
 questions, and choosing wrong costs a full re-render.
+
+**Deck cut** (`scripts/build_deck_cut.py`) — there is a designed slide deck
+plus a voiceover recording. The deck is the visual; screenshots overlay the
+slides that teach them. This is the usual shape for a course module.
 
 **Overlay cut** (`scripts/build_overlay.py`) — there is already a finished
 lesson video with its own narration and visuals. Screenshot cards float over it
 while it plays. The lesson keeps its own audio; nothing else is mixed in.
 
 **Script cut** (`scripts/build_script_cut.py`) — there is a written script with
-slides and bullets plus a voiceover recording, but no finished lesson video.
+slides and bullets plus a voiceover recording, but no deck and no lesson video.
 Slides are rendered from the script and the recording narrates them.
 
-If both a lesson video and a separate script exist, they are usually different
-takes of the same material. Check before assuming they pair: compare the
-lesson's transcript against the script's opening line. Two recordings of the
-same lesson will diverge in wording and pacing, and forcing them together puts
-every visual on the wrong sentence. Build them as separate cuts and let the
-user choose.
+If several sources exist, they are usually different takes of the same
+material rather than parts of one video. Check before assuming they pair:
+compare a lesson's transcript, or a script's opening line, against the others.
+Two recordings of the same lesson diverge in wording and pacing, and forcing
+them together puts every visual on the wrong sentence. Build them as separate
+cuts and let the user choose.
+
+A written script's own chapter marks describe the take it was written for,
+not necessarily the recording in hand. Divide the script's word count by the
+recording's length: 110-150 wpm means they match, 40 wpm means they do not.
 
 ## Identify the source files before planning
 
@@ -51,32 +59,43 @@ What the numbers tell you:
   recording's length gives words per minute. Normal narration is 110-150 wpm.
   If a pairing implies 40 wpm, that script does not belong to that recording.
 
-## Timing is the whole job
+## Timing is the whole job, and it cannot be inferred
 
-Screenshots spaced evenly across a video will land on the wrong sentence almost
-everywhere. Viewers notice immediately, and it reads as carelessness. Derive
-timing from the audio instead.
+Visuals spaced evenly across a recording land on the wrong sentence almost
+everywhere. Viewers notice at once and it reads as carelessness. Neither is
+word count a substitute: on Module 01 it gave one slide fourteen seconds where
+the narration spends five, and another twenty-three where it spends
+thirty-seven. How much text a slide carries says nothing about how long a
+speaker dwells on it.
 
-**When the lesson has a subtitle track**, extract it and read it:
+Timing has to come from the audio. In order of preference:
+
+**A subtitle track**, if the source has one — the only fully automatic route:
 
 ```bash
 python scripts/extract_cues.py LESSON.mp4
 ```
 
-This prints the transcript with timestamps. Set one phase anchor per
-instruction the narration gives, then list that step's screenshots under it.
-`build_overlay.py` divides each phase evenly among its screenshots, so the
-group stays inside the sentence that describes it.
+This prints the transcript with timestamps. Set one anchor per instruction the
+narration gives and list that step's screenshots under it.
 
-**When there is no subtitle track**, you need the written script. Allocate each
-slide's time by word count, which `build_script_cut.py` does automatically.
-Word-proportional allocation beats the script's own estimated chapter marks:
-speech rate is near constant within a recording, while the estimates drift as
-soon as the actual read runs longer or shorter than planned.
+**Marks from whoever recorded it.** Ask for the second each step begins. Eight
+marks time a fourteen-slide deck, because slides between two anchors divide
+the gap. This takes them a couple of minutes and removes all the guesswork —
+ask early rather than shipping a guess and iterating.
 
-Transcribing audio yourself needs an ASR model, and model hosts are blocked in
-many sandboxed environments. Test reachability before promising it, and fall
-back to asking for the script.
+**What does not work**, so the time is not spent rediscovering it:
+
+- *Silence detection.* A narrator reading continuously leaves no gap at slide
+  boundaries. On Module 01 the whole first two minutes is one unbroken speech
+  block at `-30dB`, so there is nothing to detect.
+- *ASR.* Model hosts are blocked in many sandboxes even where PyPI is
+  reachable. Test before promising it.
+- *A script's stated chapter marks.* They describe the take it was written
+  for. Verify against the recording's length first.
+
+Say plainly when timing is a guess. A video that looks finished but drifts
+costs more trust than one that is honestly labelled.
 
 ## Finding screenshots that "aren't there"
 
@@ -164,9 +183,34 @@ If a download fails or a player shows only its logo, check whether the file
 actually arrived before re-rendering. A player that reports it "cannot open the
 MRL" is describing a missing file, not a broken one.
 
+## Brand
+
+Colours, wordmark and fonts live in `BRAND` in `scripts/common.py`. Take them
+from the project's own stylesheet rather than inventing them — a course kit,
+site or deck usually defines CSS custom properties that are the real source of
+truth. Guessing a palette produces work that looks finished and is wrong
+throughout, which is expensive to discover late.
+
+Fonts are bundled in `assets/fonts/`. Where Google Fonts is blocked, the npm
+registry is often still reachable: `npm pack @fontsource/<family>` gives woff2,
+and `fonttools` converts it to the TTF that PIL and ffmpeg need.
+
+## When to reach for Remotion instead
+
+This pipeline renders without a browser and is right for a batch re-render.
+What it cannot do is show the result while someone adjusts it, which is
+exactly what timing needs. The companion Remotion project puts slides and
+voiceover on one timeline, so a cue that lands late is a number edited with
+the preview reloading live. It also does real motion — springs, cross-fades,
+progress — which ffmpeg does clumsily.
+
+Use this pipeline to render; use Remotion to decide the timing, then bring
+the numbers back here. Both read the same anchor model.
+
 ## References
 
-- `references/config-format.md` — config schema for both pipelines, with a
-  worked example
-- `references/troubleshooting.md` — the failures that produce unplayable
-  files, and why each one happens. Read this before debugging ffmpeg output.
+- `references/config-format.md` — config schema for all three pipelines, with
+  worked examples
+- `references/troubleshooting.md` — the failures that produce unplayable files
+  or wrong-looking output, and why each happens. Read this before debugging
+  ffmpeg, LibreOffice or font output; most of it is not guessable.
