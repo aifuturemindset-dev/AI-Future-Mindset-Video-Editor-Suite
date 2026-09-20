@@ -12,28 +12,73 @@ from PIL import Image, ImageDraw
 
 import build_module_00 as base
 from build_module_00 import (BOLD, BUILD, H, LESSON, OUT, PRIMARY,
-                             SHOTS, W, concat, duration, font, run,
+                             W, concat, duration, font, run,
                              sticky_note, title_card, still_segment,
                              lesson_chain, FPS, INTRO_SECONDS, OUTRO_SECONDS)
 
-# Cued against the lesson's own narration, read from its mov_text subtitle
-# track. Times are lesson-relative seconds. The lesson turns to GitHub at
-# 51.3s and Google Sheets at 81.3s; screenshots for those steps never reached
-# disk, so nothing is cued past 51.3s.
-CUES = [
-    ("30.png", "Sign in with Google", 10.3, 13.2),
-    ("33.png", "Open Projects", 13.2, 16.0),
-    ("31.png", "Click New project", 16.0, 18.4),
-    ("32.png", "Add project details", 18.4, 22.5),
-    ("34.png", "Open your brand voice file", 22.5, 27.0),
-    ("35.png", "Select brand-voice.txt", 27.0, 32.4),
-    ("36.png", "Click Customize", 32.4, 37.2),
-    ("37.png", "Open the Skills tab", 37.2, 41.9),
-    ("38.png", "Switch to Yours", 41.9, 46.5),
-    ("39.png", "Click Add to upload skills", 46.5, 51.3),
+# Anchors read from the lesson's own mov_text subtitle track, saved as
+# assets/lesson-transcript.srt. Each phase begins where the narration begins
+# that step; its screenshots divide the span up to the next phase.
+PHASES = [
+    (10.3, "head to claude.ai, create a new project", [
+        ("01-sign-in.png", "Sign in with Google"),
+        ("02-projects.png", "Open Projects"),
+        ("03-new-project.png", "Click New project"),
+    ]),
+    (20.2, "set your brand identity, upload brand voice", [
+        ("04-project-details.png", "Add project details"),
+        ("05-brand-voice-file.png", "Open your brand voice file"),
+        ("06-select-brand-voice.png", "Select brand-voice.txt"),
+    ]),
+    (32.4, "click customize, skills tab, install the eight skills", [
+        ("07-customize.png", "Click Customize"),
+        ("08-skills-tab.png", "Open the Skills tab"),
+        ("09-yours-tab.png", "Switch to Yours"),
+        ("10-add.png", "Click Add"),
+        ("11-upload-skill.png", "Click Upload skill"),
+        ("12-browse-files.png", "Click Browse files"),
+        ("13-open-zips.png", "Select all 8 skill zips"),
+    ]),
+    (51.3, "open github.com and create a new repository", [
+        ("14-github-signup.png", "Sign up for GitHub"),
+        ("15-create-repository.png", "Click Create repository"),
+    ]),
+    (62.3, "name the repo, upload your course kit, commit", [
+        ("16-upload-files.png", "Click Upload files"),
+        ("17-choose-file.png", "Click Choose file"),
+        ("18-course-kit.png", "Pick the Course Kit folder"),
+        ("19-commit-changes.png", "Click Commit changes"),
+    ]),
+    (81.3, "move to Google Sheets and import the calendar", [
+        ("20-sheets-file.png", "Click File"),
+        ("21-import.png", "Click Import"),
+        ("22-browse.png", "Click Browse"),
+        ("23-open-csv.png", "Open content-calendar.csv"),
+        ("24-import-data.png", "Click Import data"),
+    ]),
 ]
 
+# The narration turns to "join the community" here, which has no UI step.
+PHASES_END = 102.3
+
+SCREENSHOTS = base.ROOT / "assets" / "screenshots"
+
 FADE = 0.35
+
+
+def build_cues():
+    cues = []
+    bounds = [phase[0] for phase in PHASES] + [PHASES_END]
+    for index, (start, _label, shots) in enumerate(PHASES):
+        span = (bounds[index + 1] - start) / len(shots)
+        for offset, (filename, caption) in enumerate(shots):
+            cues.append((filename, caption,
+                         round(start + offset * span, 2),
+                         round(start + (offset + 1) * span, 2)))
+    return cues
+
+
+CUES = build_cues()
 
 CARD_MAX_W = 620
 CARD_MAX_H = 430
@@ -111,7 +156,7 @@ def main():
     print(f"[2/4] {len(CUES)} overlay cards")
     cards = []
     for index, (filename, caption, start, end) in enumerate(CUES):
-        shot = SHOTS / filename
+        shot = SCREENSHOTS / filename
         if not shot.exists():
             sys.exit(f"missing screenshot: {shot}")
         card = BUILD / f"ov_card_{index}.png"
