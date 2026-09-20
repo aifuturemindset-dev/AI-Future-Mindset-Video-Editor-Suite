@@ -20,30 +20,43 @@ AUDIO_RATE = "48000"
 AUDIO_BITRATE = "128k"
 TIMESCALE = "90000"
 
+# Tokens from the course kit's own stylesheet (course-hub.html / slide-decks.html),
+# dark theme. The accent is pink, which is also why the tutorial screenshots'
+# callout arrows are magenta.
 BRAND = {
-    "primary": "#4DD9E8",
+    "primary": "#FF1493",
+    "primary_soft": "#FF7AC6",
     "secondary": "#F3EEFF",
+    "muted": "#A89FCB",
     "background": "#0E0B1F",
-    "panel": "#141123",
+    "panel": "#171331",
+    "line": "#2E2754",
     "postit": "#FFE86B",
     "postit_ink": "#2A2416",
     "wordmark": "AI FUTURE MINDSET",
     "title": "AI CONTENT ENGINE",
 }
 
-# Comic Neue reads as handwriting without looking like a novelty font.
-# Install with: apt-get install -y fonts-comic-neue
-FONT_BOLD = "/usr/share/fonts/opentype/comic-neue/ComicNeue-Bold.otf"
-FONT_REGULAR = "/usr/share/fonts/opentype/comic-neue/ComicNeue-Regular.otf"
-FONT_FALLBACK_BOLD = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
-FONT_FALLBACK_REGULAR = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
+# Orbitron for display, Rajdhani for body, per the course kit stylesheet.
+# Neither is in apt and Google Fonts is blocked here; both come from npm
+# (@fontsource/*) as woff2 and are converted to TTF with fonttools. Bundled
+# in assets/fonts/ so a build does not depend on network access.
+_BUNDLED = Path(__file__).resolve().parent.parent / "assets" / "fonts"
+FONT_CANDIDATES = [
+    (_BUNDLED / "Orbitron-Bold.ttf", _BUNDLED / "Rajdhani-SemiBold.ttf"),
+    (Path("/usr/share/fonts/truetype/aifm-brand/Orbitron-Bold.ttf"),
+     Path("/usr/share/fonts/truetype/aifm-brand/Rajdhani-SemiBold.ttf")),
+    (Path("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"),
+     Path("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf")),
+]
 
 
 def fonts():
-    """Comic Neue when installed, DejaVu otherwise, so a build never dies on fonts."""
-    if Path(FONT_BOLD).exists():
-        return FONT_BOLD, FONT_REGULAR
-    return FONT_FALLBACK_BOLD, FONT_FALLBACK_REGULAR
+    """Brand fonts when present, DejaVu last so a build never dies on fonts."""
+    for bold, regular in FONT_CANDIDATES:
+        if bold.exists() and regular.exists():
+            return str(bold), str(regular)
+    raise SystemExit("no usable fonts found")
 
 
 BOLD, REGULAR = fonts()
