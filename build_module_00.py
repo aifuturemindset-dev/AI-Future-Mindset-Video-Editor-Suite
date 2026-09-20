@@ -225,6 +225,32 @@ def concat(files, dest, copy=True):
          *codec, "-movflags", "+faststart", str(dest), "-y"], f"concat {dest.name}")
 
 
+def lesson_chain():
+    """The branded frame burned onto the lesson: top bar, wordmark, step list."""
+    chain = (
+        f"scale={W}:{H}:force_original_aspect_ratio=decrease,"
+        f"pad={W}:{H}:(ow-iw)/2:(oh-ih)/2:color=0x0E0B1F,"
+        f"drawbox=x=0:y=0:w=iw:h=76:color=0x0E0B1F@0.90:t=fill,"
+        f"drawtext=text='A I   F U T U R E   M I N D S E T':x=36:y=26:"
+        f"fontsize=18:fontcolor=0x4DD9E8:fontfile={BOLD},"
+        f"drawtext=text='AI CONTENT ENGINE':x=(w-text_w)/2:y=90:fontsize=50:"
+        f"fontcolor=white:fontfile={BOLD}:borderw=3:bordercolor=0x4DD9E8,"
+        f"drawbox=x=0:y=ih-220:w=iw:h=220:color=0x0E0B1F@0.91:t=fill,"
+        f"drawbox=x=0:y=ih-4:w=iw:h=4:color=0x4DD9E8:t=fill"
+    )
+    for index, label in enumerate(COURSE_STEPS):
+        num_x, text_x = (60, 110) if index < 3 else (960, 1010)
+        y = [196, 130, 64, 196, 130][index]
+        # drawtext exposes h, not ih; ih is drawbox-only.
+        chain += (
+            f",drawtext=text='{index + 1}.':fontsize=22:fontcolor=0x4DD9E8:"
+            f"fontfile={BOLD}:x={num_x}:y=h-{y}"
+            f",drawtext=text='{label}':fontsize=20:fontcolor=0xF3EEFF:"
+            f"fontfile={REGULAR}:x={text_x}:y=h-{y - 2}"
+        )
+    return chain
+
+
 def main():
     for path in [LESSON, *NARRATION]:
         if not path.exists():
@@ -240,29 +266,8 @@ def main():
 
     print("[2/6] lesson video with burned-in overlay")
     # -sn drops the mov_text subtitle track; it is what broke the earlier concat.
-    overlay = (
-        f"scale={W}:{H}:force_original_aspect_ratio=decrease,"
-        f"pad={W}:{H}:(ow-iw)/2:(oh-ih)/2:color=0x0E0B1F,"
-        f"drawbox=x=0:y=0:w=iw:h=76:color=0x0E0B1F@0.90:t=fill,"
-        f"drawtext=text='A I   F U T U R E   M I N D S E T':x=36:y=26:"
-        f"fontsize=18:fontcolor=0x4DD9E8:fontfile={BOLD},"
-        f"drawtext=text='AI CONTENT ENGINE':x=(w-text_w)/2:y=90:fontsize=50:"
-        f"fontcolor=white:fontfile={BOLD}:borderw=3:bordercolor=0x4DD9E8,"
-        f"drawbox=x=0:y=ih-220:w=iw:h=220:color=0x0E0B1F@0.91:t=fill,"
-        f"drawbox=x=0:y=ih-4:w=iw:h=4:color=0x4DD9E8:t=fill"
-    )
-    for index, label in enumerate(COURSE_STEPS):
-        num_x, text_x = (60, 110) if index < 3 else (960, 1010)
-        y = [196, 130, 64, 196, 130][index]
-        # drawtext exposes h, not ih; ih is drawbox-only.
-        overlay += (
-            f",drawtext=text='{index + 1}.':fontsize=22:fontcolor=0x4DD9E8:"
-            f"fontfile={BOLD}:x={num_x}:y=h-{y}"
-            f",drawtext=text='{label}':fontsize=20:fontcolor=0xF3EEFF:"
-            f"fontfile={REGULAR}:x={text_x}:y=h-{y - 2}"
-        )
     run([
-        "ffmpeg", "-i", str(LESSON), "-sn", "-vf", overlay,
+        "ffmpeg", "-i", str(LESSON), "-sn", "-vf", lesson_chain(),
         "-c:v", "libx264", "-preset", PRESET, "-crf", CRF, "-pix_fmt", "yuv420p",
         "-r", str(FPS), "-c:a", "aac", "-b:a", "128k", "-ar", AUDIO_RATE, "-ac", "2",
         "-video_track_timescale", "90000", str(BUILD / "seg_1.mp4"), "-y",
