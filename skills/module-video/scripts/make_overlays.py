@@ -38,7 +38,7 @@ def scaled(w, h):
     return min(w, h) / 1080
 
 
-def wordmark(draw, xy, k, size=22, spacing=9):
+def wordmark(draw, xy, k, size=30, spacing=11):
     c.tracked_text(draw, xy, c.BRAND["wordmark"],
                    c.font(c.BOLD, int(size * k)), rgba(PINK), spacing * k)
 
@@ -85,7 +85,7 @@ def frame_border(w, h):
     draw.rectangle([inset, inset, w - inset, h - inset],
                    outline=rgba(PINK), width=weight)
 
-    plate = (int(470 * k), int(66 * k))
+    plate = (int(610 * k), int(78 * k))
     draw.rectangle([inset, inset, inset + plate[0], inset + plate[1]],
                    fill=rgba(c.BRAND["background"], 235))
     wordmark(draw, (inset + int(26 * k), inset + int(22 * k)), k)
@@ -113,7 +113,7 @@ def lower_third(w, h):
     draw.rectangle([x, y, x + int(10 * k), y + plate_h], fill=rgba(PINK))
     draw.rectangle([x, y + plate_h, x + plate_w, y + plate_h + int(5 * k)],
                    fill=rgba(PINK_SOFT))
-    wordmark(draw, (x + int(38 * k), y + plate_h + int(26 * k)), k, size=18, spacing=7)
+    wordmark(draw, (x + int(38 * k), y + plate_h + int(24 * k)), k, size=24, spacing=9)
     return img
 
 
