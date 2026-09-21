@@ -1,0 +1,97 @@
+{
+  "module": "00",
+  "output_dir": "output/videos",
+  "output_name": "Module_00_Script.mp4",
+  "screenshots_dir": "assets/screenshots",
+  "narration": "/root/.claude/uploads/7480ea35-ff60-5ba2-b5ab-d4a76ac8bb87/df510ece-Part_2_0629.mp4",
+  "slides": [
+    {
+      "title": "Welcome to the AI Content Engine",
+      "bullets": [
+        "You direct, Claude drafts, you approve",
+        "8 modules, one weekly system",
+        "Built for beginners"
+      ],
+      "voiceover": "Welcome to the AI Content Engine. In this course you are the director and Claude is your crew. Claude drafts, researches, and organizes. You decide, approve, and publish. We go step by step, and you do not need to be technical. By the end, you'll have a weekly system you can actually run.",
+      "shots": []
+    },
+    {
+      "title": "What you'll build",
+      "bullets": [
+        "A Claude Project with 8 skills",
+        "A GitHub repo for your files",
+        "A content calendar and funnel"
+      ],
+      "voiceover": "Here's what you'll walk away with. A Claude Project that already knows your brand. Eight skills that write hooks, scripts, carousels, thumbnails, research, and emails. A GitHub repo that keeps your files organized. And a content calendar connected to a simple funnel.",
+      "shots": []
+    },
+    {
+      "title": "Step 1: Create your Claude Project",
+      "bullets": [
+        "Click Projects, then Create project",
+        "Name it Content Engine",
+        "Paste your brand voice into instructions"
+      ],
+      "voiceover": "Let's set up. Open claude dot ai. In the left sidebar, click Projects, then Create project. Name it Content Engine. Now click the instructions area and paste in your brand voice file. This is how Claude remembers who you are, who you serve, and how you sound, every time you open a new chat in this project.",
+      "shots": [
+        ["01-sign-in.png", "Open claude.ai"],
+        ["02-projects.png", "Click Projects"],
+        ["03-new-project.png", "Click Create project"],
+        ["04-project-details.png", "Name it Content Engine"],
+        ["05-brand-voice-file.png", "Open your brand voice"],
+        ["06-select-brand-voice.png", "Paste it into instructions"]
+      ]
+    },
+    {
+      "title": "Step 2: Install your skills",
+      "bullets": [
+        "Click Customize, then Skills",
+        "Click +, then upload",
+        "Upload all 8 skill zips"
+      ],
+      "voiceover": "Next, skills. Click Customize in the left sidebar, then the Skills tab. Click the plus button, choose the upload option, and select the first zip from the skills-zips folder. Repeat until all eight are installed. Type a forward slash in a chat or in Cowork to see them. Menu names can shift as the app updates, so if a button looks different, look for the closest match.",
+      "shots": [
+        ["07-customize.png", "Click Customize"],
+        ["08-skills-tab.png", "Open the Skills tab"],
+        ["09-yours-tab.png", "Switch to Yours"],
+        ["10-add.png", "Click the plus"],
+        ["11-upload-skill.png", "Choose Upload skill"],
+        ["12-browse-files.png", "Click Browse files"],
+        ["13-open-zips.png", "Select all 8 zips"]
+      ]
+    },
+    {
+      "title": "Step 3: Create your repo",
+      "bullets": [
+        "github.com, click New repository",
+        "Name it content-engine",
+        "Upload the kit, click Commit changes"
+      ],
+      "voiceover": "Now your file home. Go to github dot com and click New repository. Name it content-engine and click Create. Click uploading an existing file, drag in the course kit, and click Commit changes. Your repo is now your single source of truth for skills, templates, and scripts.",
+      "shots": [
+        ["14-github-signup.png", "Go to github.com"],
+        ["15-create-repository.png", "Click New repository"],
+        ["16-upload-files.png", "Click uploading an existing file"],
+        ["17-choose-file.png", "Choose your files"],
+        ["18-course-kit.png", "Drag in the course kit"],
+        ["19-commit-changes.png", "Click Commit changes"]
+      ]
+    },
+    {
+      "title": "Your first task",
+      "bullets": [
+        "Fill in brand-voice.md",
+        "Import the content calendar",
+        "Introduce yourself in Skool"
+      ],
+      "voiceover": "Your task for this module. Fill in the brand voice template. Import the content calendar into Google Sheets. Then head to the Skool community and post your niche and one content goal. Pause this video, finish these three things, and meet me in Module One.",
+      "shots": [
+        ["20-sheets-file.png", "Open Google Sheets"],
+        ["21-import.png", "Click Import"],
+        ["22-browse.png", "Click Browse"],
+        ["23-open-csv.png", "Pick content-calendar.csv"],
+        ["24-import-data.png", "Click Import data"]
+      ]
+    }
+  ]
+}
