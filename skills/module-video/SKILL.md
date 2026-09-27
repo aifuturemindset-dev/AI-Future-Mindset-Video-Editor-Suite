@@ -84,31 +84,31 @@ marks time a fourteen-slide deck, because slides between two anchors divide
 the gap. This takes them a couple of minutes and removes all the guesswork —
 ask early rather than shipping a guess and iterating.
 
-**Aligning the written script to the audio by its pauses**, when the read is
-a delivered one — short clauses with a beat between them:
+**Forced alignment, whenever a written script and its recording both exist.**
+This is the first thing to try, ahead of asking for marks:
 
 ```bash
-python scripts/align_script.py NARRATION.mov script.txt -o aligned.json
+python scripts/align_forced.py NARRATION.mov script.txt -o aligned.json
 ```
 
-This gives a start time for every line, with no model download and no
-network. It is not ASR — it never works out what was said. It matches the
-script's lines against the recording's breath groups as a shortest path.
-On "Finish One" it timed 113 lines against 140 segments and put every cut on
-the right sentence.
+It gives a start time for every line with no model download and no network,
+and it is not ASR: aeneas synthesises the script with espeak and warps that
+against the real audio, so it never has to recognise a word. That is why it
+works where every ASR host is blocked. Read `references/alignment.md` for
+setup (aeneas needs three fixes on a modern box) and for the two checks to
+run before trusting the output.
 
-It only works where the reader pauses at line boundaries, so it prints the
-checks that tell you whether it did. Read `references/alignment.md` before
-relying on the output — particularly the part about leaving a title line in
-the script file, which shifts every cue and still reports a healthy score.
+Align the exact audio you will ship, after any loudness normalisation — the
+raw and normalised versions of one read differ by up to five seconds.
 
 **What does not work**, so the time is not spent rediscovering it:
 
-- *Silence detection on a continuous read.* This is the same measurement the
-  aligner above is built on, and whether it works is a property of the
-  recording, not of the technique. Module 01's narration is one unbroken
-  speech block at `-30dB` for two minutes — nothing to detect. "Finish One"
-  pauses after nearly every line. Run the check; do not assume either way.
+- *Matching pauses alone* (`scripts/align_script.py`). It shipped a cut that
+  drifted ten seconds in the middle while looking right at both ends, and the
+  checks passed it. Pause matching knows only where the gaps are, so a wrong
+  grouping stays self-consistent and nothing in the audio argues back. Keep it
+  only for audio where aeneas cannot run, and read the post-mortem in
+  `references/alignment.md` first.
 - *ASR.* Model hosts are blocked in many sandboxes even where PyPI is
   reachable — HuggingFace, `openaipublic`, `alphacephei` and
   `download.pytorch.org` all fail here while PyPI and npm succeed. Test

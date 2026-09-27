@@ -1,104 +1,119 @@
-# Aligning a script to its narration
+# Timing a script against its narration
 
-Timing is the part of this job that cannot be guessed, and this is the route
-that works when there is no subtitle track, nobody supplied marks, and the
-ASR hosts are blocked.
+Timing is the part of this job that cannot be guessed, and getting it wrong
+is the failure that has cost this project the most. Two methods live here.
+**Use forced alignment.** The other is a fallback, and this page exists
+largely to record why.
 
-It needs nothing but ffmpeg and the script. It is not ASR: it never tries to
-work out *what* was said. It uses the fact that a scripted read **pauses
-between lines**, matches the pauses against the script you already have, and
-recovers a start time for every line.
-
-`scripts/align_script.py` implements it.
+## Use forced alignment
 
 ```bash
-python scripts/align_script.py NARRATION.mov script.txt -o aligned.json
+python scripts/align_forced.py NARRATION.mov script.txt -o aligned.json
 ```
 
-## When it works, and when it does not
+It is not ASR. aeneas synthesises the script with espeak and warps that
+against the real recording (DTW over MFCCs), so it never has to *recognise* a
+word — only to line up two readings of the same sentence. That is a far easier
+problem, and it is why this works in a sandbox where every ASR model host is
+blocked (HuggingFace, `openaipublic`, `alphacephei`, `download.pytorch.org`,
+`ggml.ggerganov.com` — all refused; PyPI and npm are reachable).
 
-It works on a delivered, scripted read — short clauses, a beat between them.
-It does not work on a continuous read, and no tuning will change that.
+The script then snaps aeneas's assignment onto the measured speech
+boundaries, because the two methods know different things:
 
-Check before trusting it. The script prints the segment count against the
-line count:
+- **Forced alignment knows which line is being spoken.** Its seams float,
+  since nothing pins a warped synthetic voice to an audible edge.
+- **Energy segmentation knows exactly where speech stops and starts.** It has
+  no idea which line owns which gap.
 
-- **Segments ≈ lines (within about 30%)** — separable. Module 01's "Finish
-  One" narration gave 140 segments for 113 lines.
-- **Segments far below lines** — the reader does not pause at line
-  boundaries. The script exits rather than returning a plausible-looking
-  answer. Go and ask for marks.
+Take the assignment from the first and the boundaries from the second.
 
-Module 01's *other* recording is the counter-example: silence detection at
-−30 dB found one unbroken 119-second block. Same project, same voice, an
-unusable result — so run the check every time rather than assuming.
+### Setup
 
-## How it works
+aeneas is from 2017 and needs three fixes on a modern box. The setup block at
+the top of `align_forced.py` has the commands; the reasons:
 
-1. **Segment.** `silencedetect` splits the audio into speech spans, roughly
-   one per breath group. The audio is normalised to 16 kHz mono first,
-   because `silencedetect` measures RMS and the same recording read from a
-   `.mov` and from an extracted `.wav` otherwise yields different boundaries
-   — cue times that depend on which file you pointed at are not reproducible.
+- **setuptools must be pinned to 59.8.0.** Modern setuptools dropped the
+  `install_layout` option aeneas's `setup.py` sets, and the build dies in a
+  way that names neither.
+- **scipy must be installed.** Without it aeneas reports `Audio format not
+  supported by scipywavread`, which sounds like a problem with your audio and
+  is not.
+- **`numpy.fromstring` → `numpy.frombuffer`** in aeneas's bundled
+  `wavfile.py`. `fromstring` was removed in numpy 2, and it surfaces as the
+  same misleading audio-format error.
 
-2. **Align.** The counts never match one to one. Long lines are split across
-   two or three breaths; short lines get run together in one. So a *run* of
-   lines maps to a *run* of segments, in order, and the best such mapping is
-   a shortest path. It is solved as one.
+The venv is not committed (~100 MB of wheels). Point `AENEAS_PYTHON` at it or
+create it where the setup block says.
 
-   Cost is the relative error between a group's measured duration and the
-   duration its characters predict, so a two-word line is judged as strictly
-   as a long one, plus a small penalty for grouping — groups form only where
-   the timing demands them.
+### Align the file you are going to ship
 
-   A greedy left-to-right scan is the tempting shortcut and it is wrong: one
-   bad pairing early shifts everything after it and it never recovers.
+Run the aligner on the exact audio that goes into the video, after any
+loudness normalisation. Aligning the raw `.mov` and the normalised `.mp3`
+of the same read produced a median difference of 0.20s and a maximum of 5.16s
+— enough to matter. The cue times belong to one file, not to "the recording".
 
-3. **Subdivide.** Within a group, lines split the span by character count.
-   A group is at most three lines, so this only has to be roughly right.
+## Verify with something the method did not use
 
-## Verify before building on it
+Both checks the script prints are independent of the warping:
 
-The script prints two checks. Read both — the cost figure alone will not
-catch a wrong answer.
+**The opening lines.** Confirm the narrator really says the first line first.
+The most common mistake is leaving a title or a heading in the script file —
+the narrator never reads it, it swallows the opening seconds, every cue after
+it shifts, and the quality score stays healthy.
 
-**The opening lines.** Confirm the narrator actually says the first line
-first. The most common mistake is leaving a title or a section heading in
-the script file: the narrator never reads it, it swallows the opening
-seconds, every cue after it shifts, and the cost figure stays low enough to
-look healthy. This happened on the first run of "Finish One".
+**The longest pauses.** A narrator pauses longest where the argument turns, so
+the recording's big pauses should sit just before a line start. This is an
+energy measurement, not an MFCC one, so agreement means two different methods
+concur. On "Finish One" the section starts landed at −0.02s, −0.16s, −0.05s,
+−0.23s, +0.02s and +0.52s against the measured pauses.
 
-**The longest pauses.** These should land on the script's structural breaks.
-On "Finish One" they did, exactly:
+## The fallback, and why it is a fallback
 
-| pause | line that follows | section |
-|---|---|---|
-| 2.03 s | "So finish this sentence with me:" | YOU — Your Turn |
-| 1.55 s | "Now go back to your project." | YOU — Day 30 |
-| 1.42 s | "The link is below." | the offer |
-| 1.27 s | "I wasn't a developer." | I — What Changed |
+`align_script.py` matches the script's lines to the recording's breath groups
+as a shortest path, using only silence detection. It needs nothing but ffmpeg.
+It is the right tool only when aeneas cannot run.
 
-A narrator pauses longest where the argument turns. If the long pauses land
-on section starts, the alignment is not drifting. If one lands mid-sentence,
-it is.
+**It failed in production and the checks did not catch it.** On a five-minute
+video it drifted up to **ten seconds** through the middle while looking
+correct at both ends. The screen read "Now picture your unfinished project"
+while the narration was still on "I'll do it this weekend". The person
+watching found it; nothing in the pipeline did.
 
-Mean cost under about 0.25 per line is good; above that, read the report
-carefully before using the numbers.
+The reason is structural, so no amount of tuning fixes it. Pause matching
+knows only where the gaps are. One mis-grouped line early shifts everything
+after it, and **nothing in the audio contradicts the wrong answer** — the
+result stays self-consistent, the cost stays low, and the drift is invisible
+from the inside. The verification that passed it was weaker than it looked:
+checking that long pauses land near *some* section boundary is close to
+circular when the optimiser was already fitting the same gaps.
 
-## Then drive the edit from it
+Forced alignment does not have this failure mode, because it is constrained by
+what the words sound like.
 
-Do not retype the timestamps into a config — that is how cues drift back out
-of sync. Generate the config from `aligned.json`, declaring scenes by which
-*lines* they cover, and let the generator look the times up:
+## Then drive the edit from the alignment
+
+Do not retype timestamps into a config — that is how cues drift back out of
+sync. Generate the config from `aligned.json`, declaring scenes by which
+*lines* they cover:
 
 ```python
 SCENES = [
-    ("slide", "02-that-folder", 4, 7),     # lines 4-7
-    ("slide", "01-finish-one",  8, 9),
-    ("text",  None,            10, 11),
+    ("slide", 2, 26, 34),    # slide 2 covers lines 26-34
+    ("text", None, 11, 25),
 ]
 ```
 
-Put each cut in the middle of the pause between the last line of one scene
-and the first of the next, rather than on the first word. The visual is then
+Put each cut in the middle of the pause between the last line of one scene and
+the first of the next, rather than on the first word. The visual is then
 already on screen when the sentence starts, which is how an editor places it.
+
+## A note on matching assets to slides
+
+Where a deck has been animated clip by clip, do not trust the order the files
+arrived in. Correlate each clip's first frame against the reference slides
+instead — downscale both to a small greyscale patch, mean-centre, normalise,
+and take the dot product. On thirty clips across two videos every match came
+back above 0.99 with the runner-up below 0.61, which both confirms the order
+and catches a swap immediately. It costs seconds and removes a whole class of
+silent error.
