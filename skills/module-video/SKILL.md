@@ -84,13 +84,35 @@ marks time a fourteen-slide deck, because slides between two anchors divide
 the gap. This takes them a couple of minutes and removes all the guesswork —
 ask early rather than shipping a guess and iterating.
 
+**Aligning the written script to the audio by its pauses**, when the read is
+a delivered one — short clauses with a beat between them:
+
+```bash
+python scripts/align_script.py NARRATION.mov script.txt -o aligned.json
+```
+
+This gives a start time for every line, with no model download and no
+network. It is not ASR — it never works out what was said. It matches the
+script's lines against the recording's breath groups as a shortest path.
+On "Finish One" it timed 113 lines against 140 segments and put every cut on
+the right sentence.
+
+It only works where the reader pauses at line boundaries, so it prints the
+checks that tell you whether it did. Read `references/alignment.md` before
+relying on the output — particularly the part about leaving a title line in
+the script file, which shifts every cue and still reports a healthy score.
+
 **What does not work**, so the time is not spent rediscovering it:
 
-- *Silence detection.* A narrator reading continuously leaves no gap at slide
-  boundaries. On Module 01 the whole first two minutes is one unbroken speech
-  block at `-30dB`, so there is nothing to detect.
+- *Silence detection on a continuous read.* This is the same measurement the
+  aligner above is built on, and whether it works is a property of the
+  recording, not of the technique. Module 01's narration is one unbroken
+  speech block at `-30dB` for two minutes — nothing to detect. "Finish One"
+  pauses after nearly every line. Run the check; do not assume either way.
 - *ASR.* Model hosts are blocked in many sandboxes even where PyPI is
-  reachable. Test before promising it.
+  reachable — HuggingFace, `openaipublic`, `alphacephei` and
+  `download.pytorch.org` all fail here while PyPI and npm succeed. Test
+  before promising it.
 - *A script's stated chapter marks.* They describe the take it was written
   for. Verify against the recording's length first.
 
@@ -236,6 +258,8 @@ the numbers back here. Both read the same anchor model.
 
 ## References
 
+- `references/alignment.md` — recovering per-line timing from the recording
+  itself when there is no subtitle track and nobody supplied marks
 - `references/config-format.md` — config schema for all three pipelines, with
   worked examples
 - `references/troubleshooting.md` — the failures that produce unplayable files

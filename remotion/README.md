@@ -84,6 +84,52 @@ use directly. `side` is where the label sits (`left`, `right`, `above`,
 The box pulses gently while it is on screen. That is deliberate — it holds
 the eye through a long step without the marker ever drifting off the control.
 
+## Finish One — the YouTube cut
+
+`finish-one` is the full video for *I Stopped Waiting to Feel Ready — The
+100-Day AI Finish Line*: 5:02, 1920x1080, twelve storyboard stills carrying
+the beats they were designed for, and animated type for the narration
+between them.
+
+Its timing is not hand-entered. `assets/scripts/finish-one-aligned.json`
+holds a measured start time for every one of the script's 113 lines,
+recovered from the recording by `skills/module-video/scripts/align_script.py`
+(see `references/alignment.md`). `scripts/build-finish-one.py` turns that
+into `src/modules/finish-one.ts`, with scenes declared by the *lines* they
+cover rather than by timestamp:
+
+```python
+SCENES = [
+    ("slide", "02-that-folder", 4, 7),     # lines 4-7
+    ("slide", "01-finish-one",  8, 9),
+    ("text",  None,            10, 11),
+]
+```
+
+So to move a cue, change which lines a scene covers and re-run the script —
+never edit the times in the generated config, which is how cues drift back
+out of sync.
+
+Rebuild the whole thing from committed sources with:
+
+```bash
+python scripts/prep-slides.py        # 480x270 stills -> 1080p
+python scripts/build-finish-one.py   # aligned.json -> finish-one.ts
+npx remotion render finish-one out/Finish_One.mp4 --crf=24
+```
+
+Cuts land in the middle of the pause between two lines rather than on the
+first word, so the visual is already there when the sentence starts.
+
+### A note on the stills
+
+The twelve slides came back from chat at 480x270 and are upscaled offline
+with a LANCZOS pass and a light unsharp mask, which holds the type edges far
+better than the browser's bilinear scaling would. It is recovery, not
+resolution — it cannot invent detail the 480px source never had. Drop
+1920x1080 exports into `assets/finish-one/source-stills/` and re-run
+`prep-slides.py` for a genuinely sharp master; nothing else has to change.
+
 ## Add a module
 
 1. Put the assets in `public/module-02/` — `slides/`, `screenshots/`, `narration.mp3`
