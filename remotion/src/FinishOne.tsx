@@ -3,6 +3,7 @@ import {
   AbsoluteFill,
   Audio,
   Img,
+  OffthreadVideo,
   Sequence,
   interpolate,
   staticFile,
@@ -14,7 +15,19 @@ import { BrandChrome } from "./components/BrandChrome";
 import { KineticText, type Beat } from "./components/KineticText";
 
 export type Scene =
-  | { kind: "slide"; image: string; from: number; to: number; say?: string }
+  | {
+      kind: "slide";
+      image: string;
+      from: number;
+      to: number;
+      say?: string;
+      /** The animated version of this slide, when one exists. */
+      video?: string;
+      /** Still of the animation's last frame, held once the clip ends. */
+      videoLast?: string;
+      /** Seconds of animation available. */
+      videoSeconds?: number;
+    }
   | { kind: "text"; from: number; to: number; beats: Beat[] }
   | { kind: "end"; from: number; to: number; beats: Beat[] };
 
@@ -61,7 +74,7 @@ export const FinishOne: React.FC<{ config: FinishOneConfig }> = ({ config }) => 
           >
             <FadeIn skip={i === 0}>
               {scene.kind === "slide" ? (
-                <SlideScene image={scene.image} length={length} />
+                <SlideScene scene={scene} length={length} />
               ) : scene.kind === "end" ? (
                 <EndScene beats={scene.beats} from={scene.from} length={length} />
               ) : (
@@ -92,17 +105,51 @@ const FadeIn: React.FC<{ skip?: boolean; children: React.ReactNode }> = ({
 };
 
 /**
- * A storyboard still, held with a slow push.
+ * A storyboard slide.
  *
- * The stills came back from chat at 480x270 and are upscaled offline with a
- * LANCZOS pass; see scripts/prep. The push is deliberately small - these are
- * designed slides with type near the edges, and anything more crops it.
+ * Where an animated version exists it plays, slowed to cover the scene, with
+ * its own last frame underneath so a scene longer than the clip holds instead
+ * of cutting out. The clip is muted: the narration is the audio.
+ *
+ * Where there is no animation it falls back to the still, with a small push.
+ * The push stays small on purpose - these are designed slides with type near
+ * the edges, and more would crop it.
  */
-const SlideScene: React.FC<{ image: string; length: number }> = ({
-  image,
-  length,
-}) => {
+const SlideScene: React.FC<{
+  scene: Extract<Scene, { kind: "slide" }>;
+  length: number;
+}> = ({ scene, length }) => {
   const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+
+  if (scene.video) {
+    const available = scene.videoSeconds ?? 10;
+    const sceneSeconds = (length + FADE) / fps;
+    // Stretch the clip toward the scene length, but never so far that the
+    // motion reads as slow-motion; whatever is left holds on the last frame.
+    const rate = Math.min(1, Math.max(0.6, available / sceneSeconds));
+    const playable = Math.round((available / rate) * fps);
+
+    return (
+      <AbsoluteFill style={{ backgroundColor: BRAND.background, overflow: "hidden" }}>
+        {scene.videoLast ? (
+          <Img
+            src={staticFile(scene.videoLast)}
+            style={{ width: "100%", height: "100%", objectFit: "cover" }}
+          />
+        ) : null}
+        <Sequence durationInFrames={playable} layout="none">
+          <OffthreadVideo
+            src={staticFile(scene.video)}
+            playbackRate={rate}
+            muted
+            style={{ width: "100%", height: "100%", objectFit: "cover" }}
+          />
+        </Sequence>
+      </AbsoluteFill>
+    );
+  }
+
   const scale = interpolate(frame, [0, length + FADE], [1, 1.028], {
     extrapolateRight: "clamp",
   });
@@ -110,7 +157,7 @@ const SlideScene: React.FC<{ image: string; length: number }> = ({
   return (
     <AbsoluteFill style={{ backgroundColor: BRAND.background, overflow: "hidden" }}>
       <Img
-        src={staticFile(image)}
+        src={staticFile(scene.image)}
         style={{
           width: "100%",
           height: "100%",

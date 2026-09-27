@@ -12,6 +12,7 @@ there when the sentence starts.
 """
 import json
 import pathlib
+import subprocess
 
 REPO = pathlib.Path(__file__).resolve().parents[2]
 AL = json.loads((REPO / "assets/scripts/finish-one-aligned.json").read_text())
@@ -68,13 +69,23 @@ ends = starts[1:] + [TOTAL]
 out = []
 for (kind, asset, lo, hi, beats), s, e in zip(SCENES, starts, ends):
     if kind == "slide":
-        out.append({
+        scene = {
             "kind": "slide",
             "image": f"finish-one/slides/{asset}.png",
             "from": round(s, 2),
             "to": round(e, 2),
             "say": AL[lo]["text"],
-        })
+        }
+        # Prefer the animated slide when one has been supplied.
+        clip = REPO / f"remotion/public/finish-one/animations/{asset}.mp4"
+        if clip.exists():
+            scene["video"] = f"finish-one/animations/{asset}.mp4"
+            scene["videoLast"] = f"finish-one/animations/{asset}-last.png"
+            scene["videoSeconds"] = round(float(subprocess.run(
+                ["ffprobe", "-v", "error", "-show_entries", "format=duration",
+                 "-of", "csv=p=0", str(clip)],
+                capture_output=True, text=True).stdout.strip()), 2)
+        out.append(scene)
     elif kind == "end":
         # One sentence, three movements. Split evenly across its own span.
         span = AL[112]["end"] - AL[112]["start"]
@@ -120,7 +131,7 @@ header = '''import type { FinishOneConfig } from "../FinishOne";
  */
 export const finishOne: FinishOneConfig = {
   id: "finish-one",
-  audio: "finish-one/narration.mp3",
+  audio: "finish-one/narration-with-fx.mp3",
   durationInSeconds: %s,
   scenes: %s,
 };

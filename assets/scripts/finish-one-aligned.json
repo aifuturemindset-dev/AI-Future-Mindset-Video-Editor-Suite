@@ -3,666 +3,666 @@
   "index": 0,
   "text": "There's a folder on your computer.",
   "start": 0.94,
-  "end": 2.98
+  "end": 6.32
  },
  {
   "index": 1,
   "text": "Maybe it's called Projects.",
-  "start": 3.55,
-  "end": 4.94
+  "start": 6.32,
+  "end": 10.57
  },
  {
   "index": 2,
   "text": "Maybe it's called AI Ideas.",
-  "start": 5.46,
-  "end": 8.05
+  "start": 10.94,
+  "end": 13.61
  },
  {
   "index": 3,
   "text": "Inside that folder?",
-  "start": 8.05,
-  "end": 9.84
+  "start": 14.58,
+  "end": 16.75
  },
  {
   "index": 4,
   "text": "An automation you started on a weekend.",
-  "start": 9.84,
-  "end": 13.61
+  "start": 16.75,
+  "end": 21.33
  },
  {
   "index": 5,
   "text": "A custom GPT you opened once.",
-  "start": 14.58,
-  "end": 16.23
+  "start": 21.99,
+  "end": 23.91
  },
  {
   "index": 6,
   "text": "A Claude project with three brilliant conversations and no finish line.",
-  "start": 17.38,
-  "end": 22.21
+  "start": 23.91,
+  "end": 28.73
  },
  {
   "index": 7,
   "text": "If you keep starting over with AI projects,",
-  "start": 22.21,
-  "end": 25.11
+  "start": 29.65,
+  "end": 31.97
  },
  {
   "index": 8,
   "text": "you don't need another idea.",
-  "start": 25.81,
-  "end": 27.42
+  "start": 32.66,
+  "end": 34.24
  },
  {
   "index": 9,
   "text": "You need to finish one.",
-  "start": 27.42,
-  "end": 28.73
+  "start": 34.24,
+  "end": 35.53
  },
  {
   "index": 10,
   "text": "I'm going to show you the one question that got me to finish.",
-  "start": 29.65,
-  "end": 33.84
+  "start": 36.85,
+  "end": 40.23
  },
  {
   "index": 11,
   "text": "But first, you need to see where I was.",
-  "start": 34.55,
-  "end": 37.17
+  "start": 41.1,
+  "end": 44.62
  },
  {
   "index": 12,
   "text": "It's a weeknight.",
-  "start": 37.17,
-  "end": 38.31
+  "start": 44.62,
+  "end": 46.14
  },
  {
   "index": 13,
   "text": "The workday is finally over.",
-  "start": 38.31,
-  "end": 40.23
+  "start": 46.75,
+  "end": 48.14
  },
  {
   "index": 14,
   "text": "The house has quieted down.",
-  "start": 41.1,
-  "end": 42.31
+  "start": 48.53,
+  "end": 50.22
  },
  {
   "index": 15,
   "text": "You open the laptop and think,",
-  "start": 42.63,
-  "end": 46.14
+  "start": 50.22,
+  "end": 52.11
  },
  {
   "index": 16,
   "text": "\"Tonight. I'm finally working on my project.\"",
-  "start": 46.75,
-  "end": 50.71
+  "start": 52.11,
+  "end": 54.78
  },
  {
   "index": 17,
   "text": "Then you can't remember where you left off.",
-  "start": 50.71,
-  "end": 54.78
+  "start": 55.97,
+  "end": 59.72
  },
  {
   "index": 18,
   "text": "You search your files.",
-  "start": 55.97,
-  "end": 57.74
+  "start": 60.11,
+  "end": 61.99
  },
  {
   "index": 19,
   "text": "A notification.",
-  "start": 57.74,
-  "end": 58.92
+  "start": 61.99,
+  "end": 63.24
  },
  {
   "index": 20,
   "text": "A text.",
-  "start": 59.38,
-  "end": 59.72
+  "start": 63.24,
+  "end": 63.78
  },
  {
   "index": 21,
   "text": "Something you forgot to do.",
-  "start": 60.11,
-  "end": 62.05
+  "start": 64.43,
+  "end": 66.28
  },
  {
   "index": 22,
   "text": "You get up.",
-  "start": 62.05,
-  "end": 62.8
+  "start": 66.28,
+  "end": 66.99
  },
  {
   "index": 23,
   "text": "You come back.",
-  "start": 62.8,
-  "end": 63.78
+  "start": 66.99,
+  "end": 67.92
  },
  {
   "index": 24,
   "text": "An hour is gone.",
-  "start": 64.43,
-  "end": 65.23
+  "start": 68.27,
+  "end": 70.03
  },
  {
   "index": 25,
   "text": "The project hasn't moved.",
-  "start": 65.23,
-  "end": 66.52
+  "start": 70.03,
+  "end": 72.83
  },
  {
   "index": 26,
   "text": "And you tell yourself,",
-  "start": 66.96,
-  "end": 67.92
+  "start": 73.7,
+  "end": 75.66
  },
  {
   "index": 27,
   "text": "\"I'll do it this weekend.\"",
-  "start": 68.27,
-  "end": 70.33
+  "start": 75.66,
+  "end": 77.8
  },
  {
   "index": 28,
   "text": "I know.",
-  "start": 70.33,
-  "end": 70.87
+  "start": 77.8,
+  "end": 78.36
  },
  {
   "index": 29,
   "text": "Because I did that too.",
-  "start": 70.87,
-  "end": 72.83
+  "start": 79.31,
+  "end": 81.67
  },
  {
   "index": 30,
   "text": "Now picture your unfinished project.",
-  "start": 73.7,
-  "end": 75.76
+  "start": 81.67,
+  "end": 85.42
  },
  {
   "index": 31,
   "text": "Not a random one.",
-  "start": 75.76,
-  "end": 76.7
+  "start": 85.97,
+  "end": 86.76
  },
  {
   "index": 32,
   "text": "The one that showed up the second I said \"folder.\"",
-  "start": 77.9,
-  "end": 83.33
+  "start": 87.37,
+  "end": 90.43
  },
  {
   "index": 33,
   "text": "You can see the screen.",
-  "start": 84.25,
-  "end": 85.42
+  "start": 90.43,
+  "end": 91.86
  },
  {
   "index": 34,
   "text": "You remember why you were excited.",
-  "start": 85.97,
-  "end": 88.27
+  "start": 91.86,
+  "end": 94.01
  },
  {
   "index": 35,
   "text": "Maybe you remember the exact day you stopped.",
-  "start": 88.71,
-  "end": 91.39
+  "start": 94.62,
+  "end": 97.11
  },
  {
   "index": 36,
   "text": "Hold that picture.",
-  "start": 91.39,
-  "end": 92.42
+  "start": 98.27,
+  "end": 99.22
  },
  {
   "index": 37,
   "text": "Because I want you to hear this.",
-  "start": 92.98,
-  "end": 94.95
+  "start": 99.22,
+  "end": 100.94
  },
  {
   "index": 38,
   "text": "Unfinished doesn't mean you failed.",
-  "start": 94.95,
-  "end": 97.11
+  "start": 102.14,
+  "end": 104.15
  },
  {
   "index": 39,
   "text": "It means something mattered enough for you to begin.",
-  "start": 98.27,
-  "end": 102.78
+  "start": 104.94,
+  "end": 107.88
  },
  {
   "index": 40,
   "text": "We spend our days building everyone else's future.",
-  "start": 102.78,
-  "end": 107.12
+  "start": 109.01,
+  "end": 111.81
  },
  {
   "index": 41,
   "text": "We lead teams.",
-  "start": 107.74,
-  "end": 108.89
+  "start": 112.33,
+  "end": 113.08
  },
  {
   "index": 42,
   "text": "We solve problems.",
-  "start": 108.89,
-  "end": 110.4
+  "start": 113.08,
+  "end": 114.07
  },
  {
   "index": 43,
   "text": "We carry systems.",
-  "start": 110.4,
-  "end": 111.81
+  "start": 114.07,
+  "end": 114.99
  },
  {
   "index": 44,
   "text": "And our own ideas get pushed into a folder.",
-  "start": 112.33,
-  "end": 114.84
+  "start": 115.55,
+  "end": 118.01
  },
  {
   "index": 45,
   "text": "So here's the question that changed everything for me.",
-  "start": 114.84,
-  "end": 118.01
+  "start": 119.31,
+  "end": 121.97
  },
  {
   "index": 46,
   "text": "I stopped asking,",
-  "start": 119.31,
-  "end": 120.28
+  "start": 123.2,
+  "end": 124.33
  },
  {
   "index": 47,
   "text": "\"When will I have enough time?\"",
-  "start": 120.28,
-  "end": 121.97
+  "start": 124.33,
+  "end": 126.31
  },
  {
   "index": 48,
   "text": "And started asking,",
-  "start": 123.2,
-  "end": 124.34
+  "start": 127.34,
+  "end": 128.44
  },
  {
   "index": 49,
   "text": "\"Who do I need to become to keep the promise I made to myself?\"",
-  "start": 125.05,
-  "end": 131.26
+  "start": 129.24,
+  "end": 134.29
  },
  {
   "index": 50,
   "text": "That question is where my 100-day lock-in began.",
-  "start": 131.97,
-  "end": 134.29
+  "start": 135.56,
+  "end": 139.33
  },
  {
   "index": 51,
   "text": "I wasn't a developer.",
-  "start": 135.56,
-  "end": 136.76
+  "start": 140.61,
+  "end": 142.43
  },
  {
   "index": 52,
   "text": "I was a teacher and a leader, still learning.",
-  "start": 136.76,
-  "end": 139.33
+  "start": 142.43,
+  "end": 146.34
  },
  {
   "index": 53,
   "text": "And I entered a hackathon anyway.",
-  "start": 140.61,
-  "end": 144.84
+  "start": 146.67,
+  "end": 148.79
  },
  {
   "index": 54,
   "text": "I built Serenity Reboot around three words:",
-  "start": 145.45,
-  "end": 148.79
+  "start": 149.33,
+  "end": 152.0
  },
  {
   "index": 55,
   "text": "\"I need a reset.\"",
-  "start": 149.33,
-  "end": 150.16
+  "start": 152.0,
+  "end": 152.89
  },
  {
   "index": 56,
   "text": "The system looks at your next seventy-two hours,",
-  "start": 150.16,
-  "end": 152.89
+  "start": 153.67,
+  "end": 156.19
  },
  {
   "index": 57,
   "text": "sorts what matters,",
-  "start": 153.67,
-  "end": 154.61
+  "start": 156.19,
+  "end": 157.17
  },
  {
   "index": 58,
   "text": "moves what can move,",
-  "start": 154.61,
-  "end": 155.6
+  "start": 157.99,
+  "end": 159.25
  },
  {
   "index": 59,
   "text": "and walks you back toward calm.",
-  "start": 155.6,
-  "end": 157.17
+  "start": 159.25,
+  "end": 161.25
  },
  {
   "index": 60,
   "text": "First place.",
-  "start": 157.99,
-  "end": 158.8
+  "start": 161.25,
+  "end": 161.98
  },
  {
   "index": 61,
   "text": "Then I built Grow and Preserve OS in public.",
-  "start": 158.8,
-  "end": 161.98
+  "start": 162.61,
+  "end": 165.7
  },
  {
   "index": 62,
   "text": "Fifteen days.",
-  "start": 162.61,
-  "end": 163.32
+  "start": 165.7,
+  "end": 166.56
  },
  {
   "index": 63,
   "text": "Six AI agents.",
-  "start": 163.32,
-  "end": 164.09
+  "start": 166.56,
+  "end": 167.49
  },
  {
   "index": 64,
   "text": "One of them scheduled a garlic harvest I never planted.",
-  "start": 164.58,
-  "end": 167.49
+  "start": 168.44,
+  "end": 171.97
  },
  {
   "index": 65,
   "text": "That's another story.",
-  "start": 168.44,
-  "end": 169.62
+  "start": 171.97,
+  "end": 173.27
  },
  {
   "index": 66,
   "text": "Then my team placed third in a group hackathon called AI Swarm.",
-  "start": 169.62,
-  "end": 173.27
+  "start": 173.91,
+  "end": 179.47
  },
  {
   "index": 67,
   "text": "Here's what all three taught me.",
-  "start": 173.91,
-  "end": 175.63
+  "start": 180.41,
+  "end": 181.92
  },
  {
   "index": 68,
   "text": "The breakthrough wasn't becoming a technical expert.",
-  "start": 175.99,
-  "end": 179.47
+  "start": 181.92,
+  "end": 184.41
  },
  {
   "index": 69,
   "text": "The breakthrough was learning to turn an idea into small, finishable decisions.",
-  "start": 180.41,
-  "end": 185.13
+  "start": 184.9,
+  "end": 189.99
  },
  {
   "index": 70,
   "text": "Maybe you're thinking,",
-  "start": 185.13,
-  "end": 186.42
+  "start": 191.06,
+  "end": 192.47
  },
  {
   "index": 71,
   "text": "\"That's great. But you already knew what you were doing.\"",
-  "start": 186.73,
-  "end": 191.13
+  "start": 192.47,
+  "end": 196.03
  },
  {
   "index": 72,
   "text": "I used to think that about other people too.",
-  "start": 191.13,
-  "end": 194.7
+  "start": 196.75,
+  "end": 199.43
  },
  {
   "index": 73,
   "text": "But here's what I found.",
-  "start": 195.14,
-  "end": 196.59
+  "start": 199.92,
+  "end": 201.06
  },
  {
   "index": 74,
   "text": "We don't need more confidence before we begin.",
-  "start": 196.59,
-  "end": 199.43
+  "start": 201.7,
+  "end": 204.14
  },
  {
   "index": 75,
   "text": "Confidence gets built by beginning.",
-  "start": 199.92,
-  "end": 202.24
+  "start": 204.72,
+  "end": 207.13
  },
  {
   "index": 76,
   "text": "We don't need another course.",
-  "start": 202.24,
-  "end": 204.14
+  "start": 207.13,
+  "end": 209.12
  },
  {
   "index": 77,
   "text": "We need a reason to practice being the person who finishes.",
-  "start": 204.72,
-  "end": 208.57
+  "start": 209.12,
+  "end": 213.24
  },
  {
   "index": 78,
   "text": "That's why I'm locking in for 100 days.",
-  "start": 208.57,
-  "end": 211.09
+  "start": 214.75,
+  "end": 217.74
  },
  {
   "index": 79,
   "text": "And thirty of those days are a hackathon.",
-  "start": 211.77,
-  "end": 215.39
+  "start": 218.47,
+  "end": 221.52
  },
  {
   "index": 80,
   "text": "My mentor Mark is running a 30-day AI hackathon inside the Early AI-Dopters community.",
-  "start": 216.01,
-  "end": 223.03
+  "start": 222.25,
+  "end": 227.95
  },
  {
   "index": 81,
   "text": "One project.",
-  "start": 223.03,
-  "end": 223.96
+  "start": 227.95,
+  "end": 228.7
  },
  {
   "index": 82,
   "text": "Thirty days.",
-  "start": 224.32,
-  "end": 224.96
+  "start": 230.12,
+  "end": 230.7
  },
  {
   "index": 83,
   "text": "One step a day.",
-  "start": 225.57,
-  "end": 226.55
+  "start": 230.7,
+  "end": 231.43
  },
  {
   "index": 84,
   "text": "A community building beside you.",
-  "start": 226.55,
-  "end": 228.7
+  "start": 231.43,
+  "end": 233.05
  },
  {
   "index": 85,
   "text": "The link is below.",
-  "start": 230.12,
-  "end": 231.13
+  "start": 233.66,
+  "end": 234.8
  },
  {
   "index": 86,
   "text": "It's my affiliate link, so I earn a portion of your membership if you join. I want you to know that.",
-  "start": 231.13,
-  "end": 236.86
+  "start": 234.8,
+  "end": 241.32
  },
  {
   "index": 87,
   "text": "Now go back to your project.",
-  "start": 238.41,
-  "end": 239.98
+  "start": 242.5,
+  "end": 244.19
  },
  {
   "index": 88,
   "text": "Imagine Day 30.",
-  "start": 240.48,
-  "end": 241.32
+  "start": 245.1,
+  "end": 246.12
  },
  {
   "index": 89,
   "text": "You open your laptop,",
-  "start": 242.5,
-  "end": 244.05
+  "start": 246.12,
+  "end": 247.58
  },
  {
   "index": 90,
   "text": "and this time you're not staring at an unfinished idea.",
-  "start": 244.05,
-  "end": 248.24
+  "start": 247.58,
+  "end": 251.51
  },
  {
   "index": 91,
   "text": "You're looking at something you built.",
-  "start": 248.59,
-  "end": 251.77
+  "start": 252.24,
+  "end": 254.52
  },
  {
   "index": 92,
   "text": "Maybe small.",
-  "start": 251.77,
-  "end": 252.71
+  "start": 254.52,
+  "end": 255.19
  },
  {
   "index": 93,
   "text": "Maybe not perfect.",
-  "start": 253.31,
-  "end": 254.33
+  "start": 255.19,
+  "end": 256.24
  },
  {
   "index": 94,
   "text": "But real.",
-  "start": 254.33,
-  "end": 254.8
+  "start": 256.7,
+  "end": 257.48
  },
  {
   "index": 95,
   "text": "Someone else has used it.",
-  "start": 254.8,
-  "end": 256.24
+  "start": 257.48,
+  "end": 259.79
  },
  {
   "index": 96,
   "text": "And when someone asks, \"What are you working on?\"",
-  "start": 256.7,
-  "end": 260.27
+  "start": 260.67,
+  "end": 264.19
  },
  {
   "index": 97,
   "text": "you don't say, \"I'm learning AI.\"",
-  "start": 260.27,
-  "end": 262.57
+  "start": 264.19,
+  "end": 266.46
  },
  {
   "index": 98,
   "text": "You say, \"I built this.\"",
-  "start": 263.08,
-  "end": 264.82
+  "start": 267.31,
+  "end": 268.56
  },
  {
   "index": 99,
   "text": "Feel the difference.",
-  "start": 264.82,
-  "end": 266.46
+  "start": 268.56,
+  "end": 269.74
  },
  {
   "index": 100,
   "text": "One is an activity.",
-  "start": 267.31,
-  "end": 268.83
+  "start": 269.74,
+  "end": 270.85
  },
  {
   "index": 101,
   "text": "The other is an identity.",
-  "start": 268.83,
-  "end": 270.85
+  "start": 272.88,
+  "end": 274.11
  },
  {
   "index": 102,
   "text": "So finish this sentence with me:",
-  "start": 272.88,
-  "end": 274.47
+  "start": 274.11,
+  "end": 275.7
  },
  {
   "index": 103,
   "text": "\"By Day 30, I will have built ______.\"",
-  "start": 274.47,
-  "end": 275.9
+  "start": 275.7,
+  "end": 277.13
  },
  {
   "index": 104,
   "text": "Don't make it impressive.",
-  "start": 275.9,
-  "end": 277.13
+  "start": 278.29,
+  "end": 280.32
  },
  {
   "index": 105,
   "text": "Make it finishable.",
-  "start": 278.29,
-  "end": 279.3
+  "start": 280.79,
+  "end": 281.9
  },
  {
   "index": 106,
   "text": "Too big? Cut it in half.",
-  "start": 279.96,
-  "end": 281.88
+  "start": 281.9,
+  "end": 283.25
  },
  {
   "index": 107,
   "text": "Still too big? Cut it again.",
-  "start": 282.93,
-  "end": 284.85
+  "start": 283.25,
+  "end": 284.86
  },
  {
   "index": 108,
   "text": "Put your sentence in the comments.",
-  "start": 284.85,
-  "end": 287.29
+  "start": 285.77,
+  "end": 288.09
  },
  {
   "index": 109,
   "text": "That's your first public promise.",
-  "start": 287.86,
-  "end": 290.24
+  "start": 288.09,
+  "end": 290.33
  },
  {
   "index": 110,
   "text": "And I'll be watching.",
-  "start": 290.24,
+  "start": 290.33,
   "end": 291.73
  },
  {
