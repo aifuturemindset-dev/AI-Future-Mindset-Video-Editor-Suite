@@ -2,9 +2,11 @@ import React from "react";
 import { Composition } from "remotion";
 import { AnnotatedVideo } from "./AnnotatedVideo";
 import { FinishOne } from "./FinishOne";
+import { FinishOneShort } from "./FinishOneShort";
 import { ModuleVideo } from "./ModuleVideo";
 import { demoAnnotated } from "./modules/demo-annotated";
 import { finishOne } from "./modules/finish-one";
+import { finishOneShort } from "./modules/finish-one-short";
 import { module01 } from "./modules/module-01";
 import type { ModuleConfig } from "./types";
 
@@ -35,6 +37,15 @@ export const RemotionRoot: React.FC = () => (
       width={1920}
       height={1080}
       defaultProps={{ config: finishOne }}
+    />
+    <Composition
+      id={finishOneShort.id}
+      component={FinishOneShort}
+      durationInFrames={Math.round(finishOneShort.durationInSeconds * FPS)}
+      fps={FPS}
+      width={1080}
+      height={1920}
+      defaultProps={{ config: finishOneShort }}
     />
     <Composition
       id={demoAnnotated.id}

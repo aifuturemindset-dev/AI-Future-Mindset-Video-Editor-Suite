@@ -121,6 +121,42 @@ npx remotion render finish-one out/Finish_One.mp4 --crf=24
 Cuts land in the middle of the pause between two lines rather than on the
 first word, so the visual is already there when the sentence starts.
 
+### The vertical cut
+
+`finish-one-short` is the 1080x1920 version for Shorts, Reels and TikTok:
+57 seconds, under the 60 the format wants, with burned-in captions.
+
+It is not a crop of the master. A 16:9 still cropped to 9:16 throws away two
+thirds of a slide that was designed edge to edge, so the still keeps its own
+shape at full width and the rest of the height carries type. Layout respects
+the phone — roughly the top 210px and bottom 390px are covered by platform
+interface, so everything that has to be read sits between them.
+
+Getting five minutes down to one means cutting the narration, which is what
+usually goes wrong by ear. Because every line's start and end is measured,
+`scripts/build-finish-one-short.py` instead selects whole blocks of script
+lines and makes every cut in the middle of a pause. A cut made in silence
+has no click to hide, so the three blocks concatenate with no crossfade:
+
+```python
+BLOCKS = [
+    (0, 9),      # the hook, through "You need to finish one."
+    (46, 49),    # "I stopped asking..." -> "Who do I need to become?"
+    (102, 108),  # the ask
+]
+```
+
+It re-cuts the audio and regenerates the timeline together, so the two
+cannot drift apart. Change the blocks and re-run:
+
+```bash
+python scripts/build-finish-one-short.py
+npx remotion render finish-one-short out/Finish_One_Short.mp4 --crf=22
+```
+
+Captions are burned in rather than left to the platform: a Short is watched
+muted more often than not, and the per-line timing is already known exactly.
+
 ### A note on the stills
 
 The twelve slides came back from chat at 480x270 and are upscaled offline
