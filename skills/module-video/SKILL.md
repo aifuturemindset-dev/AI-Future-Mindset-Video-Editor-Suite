@@ -70,22 +70,9 @@ speaker dwells on it.
 
 Timing has to come from the audio. In order of preference:
 
-**A subtitle track**, if the source has one — the only fully automatic route:
-
-```bash
-python scripts/extract_cues.py LESSON.mp4
-```
-
-This prints the transcript with timestamps. Set one anchor per instruction the
-narration gives and list that step's screenshots under it.
-
-**Marks from whoever recorded it.** Ask for the second each step begins. Eight
-marks time a fourteen-slide deck, because slides between two anchors divide
-the gap. This takes them a couple of minutes and removes all the guesswork —
-ask early rather than shipping a guess and iterating.
-
-**Forced alignment, whenever a written script and its recording both exist.**
-This is the first thing to try, ahead of asking for marks:
+**1. Forced alignment**, whenever a written script and its recording both
+exist. This is the first thing to reach for — ahead of asking anyone for
+marks, because it is more precise than marks and costs them nothing:
 
 ```bash
 python scripts/align_forced.py NARRATION.mov script.txt -o aligned.json
@@ -100,6 +87,20 @@ run before trusting the output.
 
 Align the exact audio you will ship, after any loudness normalisation — the
 raw and normalised versions of one read differ by up to five seconds.
+
+**2. A subtitle track**, if the source has one and there is no script:
+
+```bash
+python scripts/extract_cues.py LESSON.mp4
+```
+
+This prints the transcript with timestamps. Set one anchor per instruction the
+narration gives and list that step's screenshots under it.
+
+**3. Marks from whoever recorded it**, when there is no script to align and no
+subtitle track. Ask for the second each step begins. Eight marks time a
+fourteen-slide deck, because slides between two anchors divide the gap. Ask
+early rather than shipping a guess and iterating.
 
 **What does not work**, so the time is not spent rediscovering it:
 
