@@ -22,15 +22,17 @@ REPO = pathlib.Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(REPO / "skills/module-video/scripts"))
 from soundbed import render_bed  # noqa: E402
 
-CONFIG = REPO / "remotion/src/modules/finish-one.ts"
-NARRATION = REPO / "remotion/public/finish-one/narration.mp3"
-BED = REPO / "remotion/public/finish-one/fx-bed.wav"
-MIXED = REPO / "remotion/public/finish-one/narration-with-fx.mp3"
+VIDEO = sys.argv[1] if len(sys.argv) > 1 else "finish-one"
+MODULE = {"finish-one": "finish-one", "serenity-reboot": "serenity-reboot"}[VIDEO]
+CONFIG = REPO / f"remotion/src/modules/{MODULE}.ts"
+NARRATION = REPO / f"remotion/public/{VIDEO}/narration.mp3"
+BED = REPO / f"remotion/public/{VIDEO}/fx-bed.wav"
+MIXED = REPO / f"remotion/public/{VIDEO}/narration-with-fx.mp3"
 
 # Storyboard "Audio & NLP Sound Design" column, slide by slide.
 # gain_db is per cue: a drone sitting under speech and a chime landing in a
 # gap want very different levels, and one global number gets both wrong.
-CUES = {
+CUES_FINISH_ONE = {
     "01-finish-one":            ("digital_pulse",      -24),
     "02-that-folder":           ("paper_shuffle",      -25),
     "03-starting-over":         ("ticking_clock",      -23),
@@ -44,6 +46,29 @@ CUES = {
     "11-day-thirty":            ("success_chime",      -21),
     "12-public-promise":        ("resonant_swell",     -25),
 }
+
+# Video 2's brief gives no per-slide effect list, so these follow each slide's
+# own content: a pulse on the chaos, a clock on the loop, a pad where the
+# nervous system settles, a chime on the win.
+CUES_SERENITY = {
+    "01": ("digital_pulse",      -24),   # the tight chest, post-it chaos
+    "02": ("paper_shuffle",      -25),   # ten hours of busy
+    "03": ("ticking_clock",      -23),   # the push-harder loop
+    "04": ("synth_pad",          -26),   # "I need a reset" - tension resolves
+    "05": ("success_chime",      -22),   # Serenity Reboot, first place
+    "06": ("airflow_rings",      -23),   # the 72-hour sort
+    "07": ("synth_pad",          -27),   # back into the day, calm
+    "08": ("whoosh",             -20),   # the midpoint turn
+    "09": ("mechanical_notches", -23),   # the triage protocol
+    "10": ("resonant_swell",     -24),   # the pull quote
+    "11": ("airflow_rings",      -24),   # the life sort equation
+    "12": ("bass_riser",         -22),   # the 30-day offer
+    "13": ("mechanical_notches", -23),   # problem / promise / deadline
+    "14": ("success_chime",      -21),   # Day 30
+    "15": ("resonant_swell",     -25),   # write the first rule
+}
+
+CUES = CUES_FINISH_ONE if VIDEO == "finish-one" else CUES_SERENITY
 
 
 def load_scenes():

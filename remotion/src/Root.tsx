@@ -6,6 +6,7 @@ import { FinishOneShort } from "./FinishOneShort";
 import { ModuleVideo } from "./ModuleVideo";
 import { demoAnnotated } from "./modules/demo-annotated";
 import { finishOne } from "./modules/finish-one";
+import { serenityReboot } from "./modules/serenity-reboot";
 import { finishOneShort } from "./modules/finish-one-short";
 import { module01 } from "./modules/module-01";
 import type { ModuleConfig } from "./types";
@@ -37,6 +38,15 @@ export const RemotionRoot: React.FC = () => (
       width={1920}
       height={1080}
       defaultProps={{ config: finishOne }}
+    />
+    <Composition
+      id={serenityReboot.id}
+      component={FinishOne}
+      durationInFrames={Math.round(serenityReboot.durationInSeconds * FPS)}
+      fps={FPS}
+      width={1920}
+      height={1080}
+      defaultProps={{ config: serenityReboot }}
     />
     <Composition
       id={finishOneShort.id}

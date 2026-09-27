@@ -36,6 +36,10 @@ export type FinishOneConfig = {
   audio: string;
   durationInSeconds: number;
   scenes: Scene[];
+  /** Series line for the chrome; defaults to Video 1's. */
+  label?: string;
+  /** Closing plate line under the wordmark. */
+  endLine?: string;
 };
 
 /** Frames of overlap between scenes. Short enough to feel like a cut. */
@@ -76,7 +80,12 @@ export const FinishOne: React.FC<{ config: FinishOneConfig }> = ({ config }) => 
               {scene.kind === "slide" ? (
                 <SlideScene scene={scene} length={length} />
               ) : scene.kind === "end" ? (
-                <EndScene beats={scene.beats} from={scene.from} length={length} />
+                <EndScene
+                  beats={scene.beats}
+                  from={scene.from}
+                  length={length}
+                  endLine={config.endLine}
+                />
               ) : (
                 <KineticText beats={scene.beats} sceneFrom={scene.from} />
               )}
@@ -85,7 +94,7 @@ export const FinishOne: React.FC<{ config: FinishOneConfig }> = ({ config }) => 
         );
       })}
 
-      <BrandChrome />
+      <BrandChrome label={config.label} />
     </AbsoluteFill>
   );
 };
@@ -170,11 +179,12 @@ const SlideScene: React.FC<{
 };
 
 /** The closing lines, then the wordmark alone. */
-const EndScene: React.FC<{ beats: Beat[]; from: number; length: number }> = ({
-  beats,
-  from,
-  length,
-}) => {
+const EndScene: React.FC<{
+  beats: Beat[];
+  from: number;
+  length: number;
+  endLine?: string;
+}> = ({ beats, from, length, endLine }) => {
   const frame = useCurrentFrame();
   const plate = interpolate(frame, [length - 58, length - 22], [0, 1], {
     extrapolateLeft: "clamp",
@@ -217,7 +227,7 @@ const EndScene: React.FC<{ beats: Beat[]; from: number; length: number }> = ({
             color: BRAND.muted,
           }}
         >
-          By Day 30, I will have built ______
+          {endLine ?? "By Day 30, I will have built ______"}
         </div>
       </AbsoluteFill>
     </AbsoluteFill>

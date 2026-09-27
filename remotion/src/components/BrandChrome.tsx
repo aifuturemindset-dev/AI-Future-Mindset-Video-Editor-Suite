@@ -13,7 +13,9 @@ import { BODY, BRAND, DISPLAY } from "../brand";
 export const BrandChrome: React.FC<{
   /** Slightly heavier over the stills, which are busier than the type scenes. */
   strength?: number;
-}> = ({ strength = 1 }) => {
+  /** The series line in the bottom right. */
+  label?: string;
+}> = ({ strength = 1, label = "THE 100-DAY AI FINISH LINE" }) => {
   const frame = useCurrentFrame();
   const { width, height, durationInFrames } = useVideoConfig();
 
@@ -85,7 +87,7 @@ export const BrandChrome: React.FC<{
           textShadow: "0 2px 14px rgba(0,0,0,0.85)",
         }}
       >
-        THE 100-DAY AI FINISH LINE
+        {label}
       </div>
 
       {/* Progress along the very bottom edge, so a viewer can feel the shape
