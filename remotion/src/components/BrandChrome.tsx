@@ -68,7 +68,9 @@ export const BrandChrome: React.FC<{
           fontSize: 22,
           letterSpacing: 9,
           color: BRAND.pink,
-          textShadow: "0 2px 14px rgba(0,0,0,0.85)",
+          padding: "9px 18px 9px 16px",
+          borderRadius: 4,
+          backgroundColor: "rgba(14,11,31,0.55)",
         }}
       >
         {BRAND.wordmark}
@@ -83,8 +85,10 @@ export const BrandChrome: React.FC<{
           fontWeight: 600,
           fontSize: 21,
           letterSpacing: 3,
-          color: BRAND.muted,
-          textShadow: "0 2px 14px rgba(0,0,0,0.85)",
+          color: BRAND.text,
+          padding: "9px 16px",
+          borderRadius: 4,
+          backgroundColor: "rgba(14,11,31,0.55)",
         }}
       >
         {label}

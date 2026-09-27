@@ -148,11 +148,22 @@ const SlideScene: React.FC<{
           />
         ) : null}
         <Sequence durationInFrames={playable} layout="none">
+          {/* Absolutely positioned on purpose. AbsoluteFill lays its children
+              out as a column, so a video that only says width/height 100%
+              lands as a second flex item after the still and collapses to
+              zero height - which renders as the still, silently, and looks
+              exactly like a clip that ends on a push-in. */}
           <OffthreadVideo
             src={staticFile(scene.video)}
             playbackRate={rate}
             muted
-            style={{ width: "100%", height: "100%", objectFit: "cover" }}
+            style={{
+              position: "absolute",
+              inset: 0,
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+            }}
           />
         </Sequence>
       </AbsoluteFill>
