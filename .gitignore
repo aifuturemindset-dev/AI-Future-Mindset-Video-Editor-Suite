@@ -1,0 +1,4 @@
+build/
+__pycache__/
+output/skill-test/
+skills/module-video/scripts/__pycache__/

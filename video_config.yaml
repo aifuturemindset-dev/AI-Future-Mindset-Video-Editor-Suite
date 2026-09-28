@@ -1,0 +1,74 @@
+# AI Content Engine - Video Production Configuration
+# Module 00: Set Up Your AI Content Studio
+
+project:
+  name: "AI Content Engine"
+  version: "1.0"
+  module: "00"
+  title: "Set Up Your AI Content Studio"
+
+branding:
+  colors:
+    primary: "4DD9E8"      # Cyan
+    secondary: "F3EEFF"    # Light purple
+    background: "0E0B1F"   # Dark navy
+
+  fonts:
+    title: "Orbitron-Bold"
+    body: "Rajdhani-Bold"
+    fallback: "DejaVuSans"
+
+video_settings:
+  resolution: "1920x1080"
+  fps: 30
+  bitrate_video: "8M"
+  bitrate_audio: "192k"
+  preset: "fast"
+  quality: 18  # CRF value (lower = better, 0-51)
+
+segments:
+  intro:
+    duration: 3
+    type: "title_card"
+    text:
+      - "AI CONTENT ENGINE"
+      - "Module 00: Set Up Your AI Content Studio"
+
+  main:
+    type: "video_enhancement"
+    effects:
+      - contrast_boost: 1.1
+      - saturation_boost: 1.15
+
+  images:
+    type: "overlay_sequence"
+    duration_each: 2
+    count: 4
+
+  outro:
+    duration: 3
+    type: "call_to_action"
+    text:
+      - "Ready to Build Your Content Engine?"
+      - "Start creating engaging content today"
+
+output:
+  directory: "output/videos"
+  formats:
+    - standard:
+        name: "Module_00_Complete.mp4"
+        quality: "fast"
+        crf: 18
+    - archive:
+        name: "Module_00_Complete_HQ.mp4"
+        quality: "slow"
+        crf: 16
+
+quality_checklist:
+  - Color grading applied
+  - Audio normalized
+  - Text overlays clear
+  - Transitions smooth
+  - Branding consistent
+  - No copyright issues
+  - Closed captions ready

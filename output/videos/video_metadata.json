@@ -1,0 +1,35 @@
+{
+  "project": "AI Content Engine",
+  "module": "00",
+  "title": "Set Up Your AI Content Studio",
+  "branding": {
+    "colors": {
+      "primary": "#4DD9E8",
+      "secondary": "#F3EEFF",
+      "background": "#0E0B1F"
+    },
+    "fonts": [
+      "DejaVuSans-Bold",
+      "DejaVuSans"
+    ]
+  },
+  "video_spec": {
+    "resolution": "1920x1080",
+    "fps": 30,
+    "duration_intro": 3,
+    "duration_main": null,
+    "duration_images": 2,
+    "duration_outro": 3
+  },
+  "assets_created": {
+    "intro": "intro_title_card.png",
+    "images": [
+      "image_overlay_1.png",
+      "image_overlay_2.png",
+      "image_overlay_3.png",
+      "image_overlay_4.png"
+    ],
+    "outro": "outro_cta_card.png"
+  },
+  "instructions": "Use ffmpeg to convert these images into videos and concatenate with main video"
+}

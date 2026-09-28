@@ -1,0 +1,716 @@
+[
+ {
+  "index": 0,
+  "text": "You know that moment when you open your calendar",
+  "start": 0.0,
+  "end": 3.49
+ },
+ {
+  "index": 1,
+  "text": "and your chest gets tight?",
+  "start": 5.6,
+  "end": 6.82
+ },
+ {
+  "index": 2,
+  "text": "Not because of one thing.",
+  "start": 7.4,
+  "end": 8.72
+ },
+ {
+  "index": 3,
+  "text": "Because of everything.",
+  "start": 8.72,
+  "end": 9.71
+ },
+ {
+  "index": 4,
+  "text": "Every block on the screen looks urgent.",
+  "start": 10.76,
+  "end": 13.83
+ },
+ {
+  "index": 5,
+  "text": "And when everything is urgent,",
+  "start": 14.32,
+  "end": 15.8
+ },
+ {
+  "index": 6,
+  "text": "nothing feels possible.",
+  "start": 15.8,
+  "end": 17.24
+ },
+ {
+  "index": 7,
+  "text": "I built an AI system for that exact moment.",
+  "start": 17.72,
+  "end": 19.48
+ },
+ {
+  "index": 8,
+  "text": "It took first place.",
+  "start": 20.56,
+  "end": 22.24
+ },
+ {
+  "index": 9,
+  "text": "But the thing that made it work wasn't the AI.",
+  "start": 22.24,
+  "end": 27.01
+ },
+ {
+  "index": 10,
+  "text": "Stay with me, because that part changes how you'll build anything.",
+  "start": 29.64,
+  "end": 31.81
+ },
+ {
+  "index": 11,
+  "text": "It was a Monday that felt like a Friday.",
+  "start": 33.96,
+  "end": 36.4
+ },
+ {
+  "index": 12,
+  "text": "Client work.",
+  "start": 36.4,
+  "end": 37.1
+ },
+ {
+  "index": 13,
+  "text": "Content.",
+  "start": 37.16,
+  "end": 38.32
+ },
+ {
+  "index": 14,
+  "text": "Family commitments.",
+  "start": 38.76,
+  "end": 41.2
+ },
+ {
+  "index": 15,
+  "text": "Messages I hadn't answered.",
+  "start": 41.8,
+  "end": 43.04
+ },
+ {
+  "index": 16,
+  "text": "I kept jumping between tasks.",
+  "start": 43.04,
+  "end": 45.8
+ },
+ {
+  "index": 17,
+  "text": "Starting.",
+  "start": 45.8,
+  "end": 46.48
+ },
+ {
+  "index": 18,
+  "text": "Stopping.",
+  "start": 46.48,
+  "end": 47.36
+ },
+ {
+  "index": 19,
+  "text": "Starting again.",
+  "start": 47.36,
+  "end": 47.64
+ },
+ {
+  "index": 20,
+  "text": "Ten hours of busy.",
+  "start": 47.64,
+  "end": 48.92
+ },
+ {
+  "index": 21,
+  "text": "Nothing that mattered had moved.",
+  "start": 48.92,
+  "end": 50.35
+ },
+ {
+  "index": 22,
+  "text": "And I remember thinking,",
+  "start": 51.12,
+  "end": 52.16
+ },
+ {
+  "index": 23,
+  "text": "\"I don't need another planner.",
+  "start": 52.16,
+  "end": 54.5
+ },
+ {
+  "index": 24,
+  "text": "I need someone to tell me what can wait.\"",
+  "start": 55.28,
+  "end": 58.01
+ },
+ {
+  "index": 25,
+  "text": "That sentence became a project.",
+  "start": 58.84,
+  "end": 60.69
+ },
+ {
+  "index": 26,
+  "text": "Maybe that's your week right now.",
+  "start": 61.16,
+  "end": 62.86
+ },
+ {
+  "index": 27,
+  "text": "If it is, hear this.",
+  "start": 63.28,
+  "end": 64.75
+ },
+ {
+  "index": 28,
+  "text": "Overwhelm doesn't mean you're bad at managing your life.",
+  "start": 65.4,
+  "end": 68.57
+ },
+ {
+  "index": 29,
+  "text": "It means you care about a lot of things",
+  "start": 69.36,
+  "end": 72.84
+ },
+ {
+  "index": 30,
+  "text": "and you're carrying all of them at once.",
+  "start": 72.84,
+  "end": 74.32
+ },
+ {
+  "index": 31,
+  "text": "We're the ones people count on.",
+  "start": 74.88,
+  "end": 76.95
+ },
+ {
+  "index": 32,
+  "text": "We hold the schedules.",
+  "start": 77.64,
+  "end": 78.69
+ },
+ {
+  "index": 33,
+  "text": "We remember the birthdays.",
+  "start": 79.08,
+  "end": 80.36
+ },
+ {
+  "index": 34,
+  "text": "We carry the deadlines for the team.",
+  "start": 80.88,
+  "end": 82.77
+ },
+ {
+  "index": 35,
+  "text": "And when our own calendar breaks,",
+  "start": 83.48,
+  "end": 85.38
+ },
+ {
+  "index": 36,
+  "text": "we tell ourselves to push harder.",
+  "start": 85.76,
+  "end": 87.14
+ },
+ {
+  "index": 37,
+  "text": "But pushing harder doesn't sort anything.",
+  "start": 88.0,
+  "end": 89.56
+ },
+ {
+  "index": 38,
+  "text": "It just makes the pile heavier.",
+  "start": 89.56,
+  "end": 92.11
+ },
+ {
+  "index": 39,
+  "text": "So I entered a hackathon.",
+  "start": 92.4,
+  "end": 94.04
+ },
+ {
+  "index": 40,
+  "text": "Solo.",
+  "start": 94.2,
+  "end": 95.36
+ },
+ {
+  "index": 41,
+  "text": "Still learning.",
+  "start": 95.36,
+  "end": 96.0
+ },
+ {
+  "index": 42,
+  "text": "I called the project Serenity Reboot.",
+  "start": 96.28,
+  "end": 98.66
+ },
+ {
+  "index": 43,
+  "text": "And the whole system starts with three words.",
+  "start": 99.32,
+  "end": 101.55
+ },
+ {
+  "index": 44,
+  "text": "\"I need a reset.\"",
+  "start": 101.52,
+  "end": 103.0
+ },
+ {
+  "index": 45,
+  "text": "You say them, or type them.",
+  "start": 103.48,
+  "end": 104.79
+ },
+ {
+  "index": 46,
+  "text": "The system reads the next seventy-two hours of your calendar and email.",
+  "start": 105.24,
+  "end": 110.22
+ },
+ {
+  "index": 47,
+  "text": "Every task gets sorted.",
+  "start": 110.84,
+  "end": 112.05
+ },
+ {
+  "index": 48,
+  "text": "High stays.",
+  "start": 112.68,
+  "end": 113.8
+ },
+ {
+  "index": 49,
+  "text": "Medium moves to a better time.",
+  "start": 113.8,
+  "end": 114.36
+ },
+ {
+  "index": 50,
+  "text": "Low steps out of the way.",
+  "start": 115.4,
+  "end": 116.93
+ },
+ {
+  "index": 51,
+  "text": "Meetings that can shift, shift.",
+  "start": 117.52,
+  "end": 118.61
+ },
+ {
+  "index": 52,
+  "text": "Then a short video plays.",
+  "start": 119.64,
+  "end": 121.07
+ },
+ {
+  "index": 53,
+  "text": "A breath.",
+  "start": 121.64,
+  "end": 122.61
+ },
+ {
+  "index": 54,
+  "text": "Your new top three.",
+  "start": 123.08,
+  "end": 124.81
+ },
+ {
+  "index": 55,
+  "text": "And you walk back into your day calm instead of scattered.",
+  "start": 125.48,
+  "end": 130.25
+ },
+ {
+  "index": 56,
+  "text": "Here's what nobody tells you about building your first AI tool.",
+  "start": 130.72,
+  "end": 131.63
+ },
+ {
+  "index": 57,
+  "text": "The code wasn't the hard part.",
+  "start": 134.08,
+  "end": 135.2
+ },
+ {
+  "index": 58,
+  "text": "The hard part showed up before the system could sort a single task.",
+  "start": 135.2,
+  "end": 139.75
+ },
+ {
+  "index": 59,
+  "text": "I had to decide what urgent actually means.",
+  "start": 141.28,
+  "end": 143.64
+ },
+ {
+  "index": 60,
+  "text": "What makes something high?",
+  "start": 143.64,
+  "end": 144.96
+ },
+ {
+  "index": 61,
+  "text": "What is allowed to move?",
+  "start": 145.44,
+  "end": 146.77
+ },
+ {
+  "index": 62,
+  "text": "Who never gets rescheduled?",
+  "start": 146.84,
+  "end": 148.63
+ },
+ {
+  "index": 63,
+  "text": "Those aren't tech questions.",
+  "start": 148.68,
+  "end": 150.75
+ },
+ {
+  "index": 64,
+  "text": "Those are leadership questions.",
+  "start": 151.24,
+  "end": 153.46
+ },
+ {
+  "index": 65,
+  "text": "And I couldn't hand them to the AI.",
+  "start": 153.92,
+  "end": 155.96
+ },
+ {
+  "index": 66,
+  "text": "I had to answer them myself, first.",
+  "start": 155.96,
+  "end": 157.86
+ },
+ {
+  "index": 67,
+  "text": "Serenity Reboot took first place.",
+  "start": 159.04,
+  "end": 161.83
+ },
+ {
+  "index": 68,
+  "text": "But the real win was this:",
+  "start": 162.56,
+  "end": 163.67
+ },
+ {
+  "index": 69,
+  "text": "AI can sort your life.",
+  "start": 164.52,
+  "end": 165.84
+ },
+ {
+  "index": 70,
+  "text": "Only after you decide what your life is for.",
+  "start": 166.48,
+  "end": 169.67
+ },
+ {
+  "index": 71,
+  "text": "Maybe you're thinking,",
+  "start": 170.48,
+  "end": 171.62
+ },
+ {
+  "index": 72,
+  "text": "\"I could never build something like that.\"",
+  "start": 172.44,
+  "end": 174.42
+ },
+ {
+  "index": 73,
+  "text": "I thought that too.",
+  "start": 175.08,
+  "end": 175.78
+ },
+ {
+  "index": 74,
+  "text": "But I didn't start with the answer.",
+  "start": 175.8,
+  "end": 178.03
+ },
+ {
+  "index": 75,
+  "text": "I started with the feeling.",
+  "start": 178.56,
+  "end": 179.98
+ },
+ {
+  "index": 76,
+  "text": "That tight chest.",
+  "start": 180.56,
+  "end": 182.9
+ },
+ {
+  "index": 77,
+  "text": "And one question:",
+  "start": 183.72,
+  "end": 184.3
+ },
+ {
+  "index": 78,
+  "text": "\"What would make this easier?\"",
+  "start": 184.36,
+  "end": 185.93
+ },
+ {
+  "index": 79,
+  "text": "We don't need to be experts to begin.",
+  "start": 186.0,
+  "end": 189.59
+ },
+ {
+  "index": 80,
+  "text": "We need to be honest about what hurts.",
+  "start": 189.64,
+  "end": 194.18
+ },
+ {
+  "index": 81,
+  "text": "Because the problems we feel the most",
+  "start": 194.52,
+  "end": 196.64
+ },
+ {
+  "index": 82,
+  "text": "are usually the ones we're best positioned to solve.",
+  "start": 196.64,
+  "end": 199.79
+ },
+ {
+  "index": 83,
+  "text": "I'm locking in for 100 days.",
+  "start": 200.32,
+  "end": 202.27
+ },
+ {
+  "index": 84,
+  "text": "Thirty of them are a hackathon.",
+  "start": 202.4,
+  "end": 205.08
+ },
+ {
+  "index": 85,
+  "text": "My mentor Mark is running a 30-day build inside the Early AI-Dopters community.",
+  "start": 205.6,
+  "end": 209.34
+ },
+ {
+  "index": 86,
+  "text": "One project.",
+  "start": 210.32,
+  "end": 210.88
+ },
+ {
+  "index": 87,
+  "text": "Thirty days.",
+  "start": 211.96,
+  "end": 213.69
+ },
+ {
+  "index": 88,
+  "text": "One step at a time.",
+  "start": 213.92,
+  "end": 215.58
+ },
+ {
+  "index": 89,
+  "text": "With people building beside you.",
+  "start": 216.56,
+  "end": 218.11
+ },
+ {
+  "index": 90,
+  "text": "Serenity Reboot started exactly the way your next project could start.",
+  "start": 218.96,
+  "end": 221.47
+ },
+ {
+  "index": 91,
+  "text": "One real problem.",
+  "start": 222.4,
+  "end": 224.2
+ },
+ {
+  "index": 92,
+  "text": "One clear promise.",
+  "start": 224.2,
+  "end": 225.33
+ },
+ {
+  "index": 93,
+  "text": "A deadline that made me finish.",
+  "start": 225.32,
+  "end": 225.9
+ },
+ {
+  "index": 94,
+  "text": "The link is below.",
+  "start": 227.32,
+  "end": 227.81
+ },
+ {
+  "index": 95,
+  "text": "It's my affiliate link, so I earn a portion of your membership if you join. I want you to know that.",
+  "start": 228.92,
+  "end": 236.52
+ },
+ {
+  "index": 96,
+  "text": "Now think about the thing that drains you every week.",
+  "start": 237.2,
+  "end": 239.58
+ },
+ {
+  "index": 97,
+  "text": "The task you dread.",
+  "start": 240.92,
+  "end": 241.37
+ },
+ {
+  "index": 98,
+  "text": "The decision you keep making over and over.",
+  "start": 241.4,
+  "end": 242.6
+ },
+ {
+  "index": 99,
+  "text": "Imagine Day 30.",
+  "start": 244.6,
+  "end": 246.24
+ },
+ {
+  "index": 100,
+  "text": "That drain has a system.",
+  "start": 246.24,
+  "end": 246.65
+ },
+ {
+  "index": 101,
+  "text": "Small.",
+  "start": 248.84,
+  "end": 249.17
+ },
+ {
+  "index": 102,
+  "text": "Simple.",
+  "start": 249.16,
+  "end": 250.0
+ },
+ {
+  "index": 103,
+  "text": "Working.",
+  "start": 250.0,
+  "end": 250.42
+ },
+ {
+  "index": 104,
+  "text": "And when someone asks what you've been doing,",
+  "start": 251.08,
+  "end": 254.37
+ },
+ {
+  "index": 105,
+  "text": "you don't say, \"Trying to get organized.\"",
+  "start": 254.4,
+  "end": 257.56
+ },
+ {
+  "index": 106,
+  "text": "You say, \"I built something that handles that for me.\"",
+  "start": 257.56,
+  "end": 257.93
+ },
+ {
+  "index": 107,
+  "text": "That's not just relief.",
+  "start": 260.72,
+  "end": 262.51
+ },
+ {
+  "index": 108,
+  "text": "That's you leading your life",
+  "start": 262.6,
+  "end": 264.6
+ },
+ {
+  "index": 109,
+  "text": "instead of your life leading you.",
+  "start": 264.6,
+  "end": 265.88
+ },
+ {
+  "index": 110,
+  "text": "So let's do this together.",
+  "start": 265.88,
+  "end": 266.13
+ },
+ {
+  "index": 111,
+  "text": "Finish this sentence:",
+  "start": 268.64,
+  "end": 269.52
+ },
+ {
+  "index": 112,
+  "text": "\"Something is only urgent if ______.\"",
+  "start": 269.68,
+  "end": 270.82
+ },
+ {
+  "index": 113,
+  "text": "That's the first rule you'd ever give an AI.",
+  "start": 272.36,
+  "end": 275.86
+ },
+ {
+  "index": 114,
+  "text": "You just wrote it.",
+  "start": 275.84,
+  "end": 277.6
+ },
+ {
+  "index": 115,
+  "text": "Drop your rule in the comments.",
+  "start": 277.6,
+  "end": 278.88
+ },
+ {
+  "index": 116,
+  "text": "I'm reading every one.",
+  "start": 280.04,
+  "end": 280.61
+ },
+ {
+  "index": 117,
+  "text": "I'll see you tomorrow.",
+  "start": 281.4,
+  "end": 282.44
+ },
+ {
+  "index": 118,
+  "text": "Protect your peace. Vibrate your power. And build what the future needs from you.",
+  "start": 282.48,
+  "end": 287.35
+ }
+]

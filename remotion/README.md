@@ -1,0 +1,205 @@
+# Module videos in Remotion
+
+Slide decks, voiceover and screenshot overlays as React components, so timing
+is something you see and drag rather than something anyone guesses at.
+
+## Why this exists
+
+The ffmpeg pipeline in `skills/module-video/` renders the same videos without
+a browser, and it is the right tool for a batch re-render. What it cannot do
+is show you the result while you adjust it. Every timing error in Module 00
+and Module 01 came from the same place: nobody could see the slides and hear
+the voiceover at the same time until the render finished.
+
+Here you scrub the timeline with both together. A slide that lands two
+seconds late takes about five seconds to fix.
+
+## Run it
+
+```bash
+cd remotion
+npm install
+npm start          # opens Remotion Studio at localhost:3000
+```
+
+Pick `module-01` in the sidebar. Press space to play, drag the playhead, use
+the left and right arrows for single frames.
+
+## Fix a slide that lands wrong
+
+Every slide's cue lives in `src/modules/module-01.ts`:
+
+```ts
+{ image: "slide-07.png", at: 43, shots: [...] },
+```
+
+`at` is the second the voiceover reaches that slide. Note where the playhead
+sits when the narration actually says it, change the number, save. The
+preview reloads as you type.
+
+Slides without `at` divide the gap between their anchored neighbours, so you
+only need to mark the ones that matter — usually where the narration says
+"Step N".
+
+## Render
+
+```bash
+npx remotion render module-01 out/module-01.mp4
+```
+
+Add `--frames=1200-1500` to render a stretch while checking a change.
+
+## Pointing at things in raw footage
+
+A screen recording shows a cursor moving but not where attention belongs, so
+a viewer following along misses the control being clicked. `Callout` marks it
+the way the tutorial screenshots do — a box around the control, a curved
+arrow, and a label naming the action — and `SkillNote` pins a post-it naming
+the skill in use.
+
+See the `demo-annotated` composition; its cues live in
+`src/modules/demo-annotated.ts`:
+
+```ts
+{
+  at: 1, until: 5,
+  box: { x: 1180, y: 300, width: 420, height: 90 },
+  label: "Click New project",
+  side: "left",
+  skill: "hook-writer",
+}
+```
+
+Get the coordinates by exporting the frame you are annotating and reading
+pixel positions off it:
+
+```bash
+ffmpeg -ss 4 -i public/demo/raw-clip.mp4 -frames:v 1 /tmp/frame.png
+```
+
+The composition is 1920x1080, so positions in that still are the numbers to
+use directly. `side` is where the label sits (`left`, `right`, `above`,
+`below`); the arrow always curves to the nearest edge of the box.
+
+The box pulses gently while it is on screen. That is deliberate — it holds
+the eye through a long step without the marker ever drifting off the control.
+
+## Finish One — the YouTube cut
+
+`finish-one` is the full video for *I Stopped Waiting to Feel Ready — The
+100-Day AI Finish Line*: 5:02, 1920x1080, twelve storyboard stills carrying
+the beats they were designed for, and animated type for the narration
+between them.
+
+Its timing is not hand-entered. `assets/scripts/finish-one-aligned.json`
+holds a measured start time for every one of the script's 113 lines,
+recovered from the recording by `skills/module-video/scripts/align_script.py`
+(see `references/alignment.md`). `scripts/build-finish-one.py` turns that
+into `src/modules/finish-one.ts`, with scenes declared by the *lines* they
+cover rather than by timestamp:
+
+```python
+SCENES = [
+    ("slide", "02-that-folder", 4, 7),     # lines 4-7
+    ("slide", "01-finish-one",  8, 9),
+    ("text",  None,            10, 11),
+]
+```
+
+So to move a cue, change which lines a scene covers and re-run the script —
+never edit the times in the generated config, which is how cues drift back
+out of sync.
+
+Rebuild the whole thing from committed sources with:
+
+```bash
+python scripts/prep-slides.py        # 480x270 stills -> 1080p
+python scripts/build-finish-one.py   # aligned.json -> finish-one.ts
+npx remotion render finish-one out/Finish_One.mp4 --crf=24
+```
+
+Cuts land in the middle of the pause between two lines rather than on the
+first word, so the visual is already there when the sentence starts.
+
+### The vertical cut
+
+`finish-one-short` is the 1080x1920 version for Shorts, Reels and TikTok:
+57 seconds, under the 60 the format wants, with burned-in captions.
+
+It is not a crop of the master. A 16:9 still cropped to 9:16 throws away two
+thirds of a slide that was designed edge to edge, so the still keeps its own
+shape at full width and the rest of the height carries type. Layout respects
+the phone — roughly the top 210px and bottom 390px are covered by platform
+interface, so everything that has to be read sits between them.
+
+Getting five minutes down to one means cutting the narration, which is what
+usually goes wrong by ear. Because every line's start and end is measured,
+`scripts/build-finish-one-short.py` instead selects whole blocks of script
+lines and makes every cut in the middle of a pause. A cut made in silence
+has no click to hide, so the three blocks concatenate with no crossfade:
+
+```python
+BLOCKS = [
+    (0, 9),      # the hook, through "You need to finish one."
+    (46, 49),    # "I stopped asking..." -> "Who do I need to become?"
+    (102, 108),  # the ask
+]
+```
+
+It re-cuts the audio and regenerates the timeline together, so the two
+cannot drift apart. Change the blocks and re-run:
+
+```bash
+python scripts/build-finish-one-short.py
+npx remotion render finish-one-short out/Finish_One_Short.mp4 --crf=22
+```
+
+Captions are burned in rather than left to the platform: a Short is watched
+muted more often than not, and the per-line timing is already known exactly.
+
+### A note on the stills
+
+The twelve slides came back from chat at 480x270 and are upscaled offline
+with a LANCZOS pass and a light unsharp mask, which holds the type edges far
+better than the browser's bilinear scaling would. It is recovery, not
+resolution — it cannot invent detail the 480px source never had. Drop
+1920x1080 exports into `assets/finish-one/source-stills/` and re-run
+`prep-slides.py` for a genuinely sharp master; nothing else has to change.
+
+## Add a module
+
+1. Put the assets in `public/module-02/` — `slides/`, `screenshots/`, `narration.mp3`
+2. Copy `src/modules/module-01.ts` to `module-02.ts` and edit the slide list
+3. Add it to `MODULES` in `src/Root.tsx`
+
+Render the deck to slide images first:
+
+```bash
+soffice --headless --convert-to pdf --outdir /tmp deck.pptx
+pdftoppm -r 96 -png /tmp/deck.pdf public/module-02/slides/slide
+```
+
+A deck whose fonts are embedded needs those fonts installed or the text
+overflows its boxes — see `skills/module-video/references/troubleshooting.md`.
+
+## Brand
+
+`src/brand.ts` holds the tokens, taken from the course kit's own stylesheet:
+pink `#FF1493` on `#0E0B1F`, Orbitron for display, Rajdhani for body. Change
+them there and every composition follows.
+
+Fonts are served from `public/fonts/` rather than a CDN, so renders do not
+depend on network access.
+
+## Rendering inside a restricted sandbox
+
+Remotion normally downloads its own Chrome from `remotion.media`. Where that
+host is blocked, point it at an existing browser:
+
+```bash
+npx remotion render module-01 out/module-01.mp4 \
+  --browser-executable=/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell \
+  --chrome-mode=chrome-for-testing --gl=swangle
+```
+
+On an ordinary machine none of those flags are needed.

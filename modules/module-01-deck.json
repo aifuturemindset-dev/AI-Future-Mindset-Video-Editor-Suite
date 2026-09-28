@@ -1,0 +1,92 @@
+{
+  "module": "01",
+  "output_dir": "output/videos",
+  "output_name": "Module_01_Deck.mp4",
+  "slides_dir": "assets/module-01/slides",
+  "screenshots_dir": "assets/module-01/screenshots",
+  "narration": "/root/.claude/uploads/7480ea35-ff60-5ba2-b5ab-d4a76ac8bb87/b0df944d-0920_1vidsModule_01_The_viral_content_formula_ho.MP3",
+  "chrome": "minimal",
+  "card_top": 430,
+  "slides": [
+    {
+      "image": "slide-01.png"
+    },
+    {
+      "image": "slide-02.png"
+    },
+    {
+      "image": "slide-03.png"
+    },
+    {
+      "image": "slide-04.png"
+    },
+    {
+      "image": "slide-05.png"
+    },
+    {
+      "image": "slide-06.png",
+      "shots": [
+        [
+          "01-content-engine.png",
+          "Open your Content Engine project"
+        ]
+      ],
+      "at": 33
+    },
+    {
+      "image": "slide-07.png",
+      "shots": [
+        [
+          "02-hook-writer.png",
+          "Use the hook-writer skill"
+        ]
+      ],
+      "at": 43
+    },
+    {
+      "image": "slide-08.png",
+      "shots": [
+        [
+          "03-score-hooks.png",
+          "Score and rank the top 5"
+        ]
+      ],
+      "at": 73
+    },
+    {
+      "image": "slide-09.png",
+      "at": 78
+    },
+    {
+      "image": "slide-10.png",
+      "at": 88
+    },
+    {
+      "image": "slide-11.png",
+      "shots": [
+        [
+          "04-full-formula.png",
+          "Value point, format, 3 CTAs"
+        ]
+      ],
+      "at": 116
+    },
+    {
+      "image": "slide-12.png",
+      "shots": [
+        [
+          "05-content-calendar.png",
+          "Save it to your calendar row"
+        ]
+      ],
+      "at": 153
+    },
+    {
+      "image": "slide-13.png",
+      "at": 177
+    },
+    {
+      "image": "slide-14.png"
+    }
+  ]
+}
